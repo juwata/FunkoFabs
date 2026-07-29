@@ -1,0 +1,16 @@
+.menu {
+    margin-top: 8px;
+}
+
+nav {
+    margin-top: 30dvh;
+}
+
+nav, li {
+    padding: 20px;
+    text-decoration: underline;
+}
+
+ul {
+    list-style: none;
+}
