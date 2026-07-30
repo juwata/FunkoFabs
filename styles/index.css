@@ -108,6 +108,12 @@ body {
     #slide1 {
         background: url(../assets/images/pc-bg1.png) center center no-repeat fixed;
         background-size: cover;
+        height: 95dvh;
+    }
+
+    .big-title {
+        font-size: 6em;
+        width: 700px;
     }
 
     #slide2 {
