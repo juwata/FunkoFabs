@@ -50,7 +50,6 @@ h2 {
 
 p {
     line-height: 95%;
-
 }
 
 
@@ -84,13 +83,14 @@ button {
 
 
 header {
+    background: var(--white);
     position: fixed;
     top: 0;
     width: 100dvw;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 30px;
+    padding: 25px 30px;
 }
 
 header .pc {display: none}
