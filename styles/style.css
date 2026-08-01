@@ -94,18 +94,27 @@ button {
 header {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100dvw;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 25px 30px;
-    z-index: 1;
-
-    /* background: rgba(255, 255, 255, 0.1);
-    height: 80px;
-    border-radius: 50px;
-    backdrop-filter: blur(5px); */
+    z-index: 1000;
+    transition: transform .35s ease;
 }
+
+header.light nav a {
+    color: var(--white);
+}
+
+header.light .actions img,
+header.light .mb img {
+    filter: brightness(0) invert(1);
+}
+
+
+
 
 header .pc {display: none}
 
@@ -124,21 +133,23 @@ input , select{
     color: #575757;
 }
 
-
-
-@media (min-width: 768px) {
-
+nav > ul > li {
+    list-style: none;
 }
 
+
+
+@media (max-width: 767px) {
+    header.hide {
+        transform: translateY(-120%);
+    }
+}
 
 
 @media (min-width: 992px) {
     * {
         font-size: 1.1rem;
     }
-
-
-
     
     header .pc {display: block}
     header .mb {display: none}
@@ -150,7 +161,6 @@ input , select{
         gap: 30px;
     }
 }
-
 
 
 @view-transition {
