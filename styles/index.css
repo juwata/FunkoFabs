@@ -51,6 +51,10 @@ body.loading {
     gap: 10px;
 }
 
+.slide1 a {
+    width: fit-content;
+}
+
 
 
 .slide2 {
@@ -334,7 +338,6 @@ h3 {
 
 
 
-/* TABLET */
 
 @media (min-width: 768px) {
     main {
