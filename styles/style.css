@@ -110,6 +110,10 @@ header {
     transition: transform .35s ease;
 }
 
+header:not(.index) {
+    background: linear-gradient(var(--white) 60%, transparent);
+}
+
 header.light nav a {
     color: var(--white);
 }
