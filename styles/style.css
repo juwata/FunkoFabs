@@ -9,6 +9,7 @@
     --pri: #DC1D25;
     --sec: #163CD4;
     --price: #30CA12;
+    --total: #FF7700;
 
     --text: 'Poppins';
     --title: 'Protest Strike'
@@ -31,7 +32,6 @@ html {
 
 body {
     background: var(--white);
-    margin-top: 120px;
 }
 
 h1 {
@@ -108,20 +108,15 @@ header.light nav a {
     color: var(--white);
 }
 
-header.light .actions img,
-header.light .mb img {
+header.light .actions img, header.light .mb img {
     filter: brightness(0) invert(1);
 }
-
-
-
 
 header .pc {display: none}
 
 
 
 .title {text-align: center}
-
 
 
 input , select{
@@ -144,6 +139,7 @@ nav > ul > li {
         transform: translateY(-120%);
     }
 }
+
 
 
 @media (min-width: 992px) {

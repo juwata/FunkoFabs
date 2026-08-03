@@ -1,0 +1,89 @@
+body {
+    margin-top: 90px;
+}
+
+.title {    
+    margin-bottom: 20px;
+}
+
+article {
+    margin: 0 auto;
+    width: 95dvw;
+    max-width: 800px;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    gap: 10px;
+}
+
+article:nth-child(2n+1) {
+    background: #00000009;
+}
+
+article:last-child {
+    margin-bottom: 80px;
+}
+
+article > a > img {
+    width: 100%;
+    max-width: 120px;
+}
+
+
+form {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.price, .total {
+    font-weight: bold;
+    font-size: 17px
+}
+
+.price {color: var(--price)}
+.total {color: var(--total)}
+
+.inp-box {
+    display: flex;
+    gap: 25px;
+    border: 2px solid var(--black);
+    width: fit-content;
+    padding: 8px 15px;
+    align-items: center;
+}
+
+.inp-box > p {
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.buy {
+    background: var(--white);
+    position: fixed;
+    bottom: 0;
+    margin: 0 auto;
+    width: 100%; height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+@media (min-width: 992px) {
+    article {
+        grid-template-columns: 1fr 5fr;
+    }
+
+    .container {
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+    }
+
+    img[src="../assets/icons/trash.svg"] {
+        width: 20px;
+    }
+}

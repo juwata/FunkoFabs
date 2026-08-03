@@ -1,3 +1,7 @@
+body {
+    margin-top: 120px;
+}
+
 main {
     width: 95dvw;
     margin: 30px auto;
@@ -8,15 +12,19 @@ main {
     row-gap: 25px;
 }
 
-section img {
+main a {
+    text-decoration: none;
+}
+
+main a img {
     width: 100%;
 }
 
-section p:first-of-type {
+main a p:first-of-type {
     font-weight: bold;
 }
 
-section p:last-of-type {
+main a p:last-of-type {
     color: var(--price);
 }
 
