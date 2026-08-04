@@ -32,18 +32,16 @@ public class User {
     @Column(name = "telefone")
     private String phone;
 
-    // Não existe no banco
-    @Transient
-    private String photoUrl;
+    @Column(name = "endereco")
+    private String address;
 
-    // Não existe no banco
     @Enumerated(EnumType.STRING)
-    @Transient
-    private Role role;
-
-    @Column(name = "data_cadastro", updatable = false)
+    @Column(name = "role")
     @Builder.Default
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private Role role = Role.CUSTOMER;
+
+    @Column(name = "data_cadastro", insertable = false, updatable = false)
+    private LocalDateTime createdAt;
 
     public enum Role {
         CUSTOMER,

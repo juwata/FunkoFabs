@@ -18,6 +18,8 @@ public class OrderService {
     private final CartService cartService;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+    private final PaymentRepository paymentRepository;
+
 
     @Transactional
     public OrderResponse checkout(String email) {
@@ -39,8 +41,17 @@ public class OrderService {
             order.getItems().add(OrderItem.builder().order(order).product(p).quantity(ci.getQuantity()).unitPrice(p.getPrice()).build());
         }
         order.setTotal(total);
+
         order = orderRepository.save(order);
+
+        paymentRepository.save(
+                Payment.builder()
+                        .order(order)
+                        .build()
+        );
+
         cartService.clearCart(email);
+
         return toResponse(order);
     }
 

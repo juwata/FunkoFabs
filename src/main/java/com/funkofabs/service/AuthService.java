@@ -26,14 +26,17 @@ public class AuthService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .phone(request.getPhone())
-                .photoUrl(request.getPhotoUrl())
                 .build();
         userRepository.save(user);
 
-        String role = User.Role.CUSTOMER.name();
+        String token = jwtUtil.generateToken(user.getEmail(), user.getRole().name());
 
-        String token = jwtUtil.generateToken(user.getEmail(), role);
-        return new AuthResponse(token, user.getName(), user.getEmail(), role);
+        return new AuthResponse(
+                token,
+                user.getName(),
+                user.getEmail(),
+                user.getRole().name()
+        );
     }
 
     public AuthResponse login(AuthRequest request) {
@@ -42,9 +45,18 @@ public class AuthService {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
-        String role = User.Role.CUSTOMER.name();
+        System.out.println("ROLE NO LOGIN: " + user.getRole());
 
-        String token = jwtUtil.generateToken(user.getEmail(), role);
-        return new AuthResponse(token, user.getName(), user.getEmail(), role);
+        String token = jwtUtil.generateToken(
+                user.getEmail(),
+                user.getRole().name()
+        );
+
+        return new AuthResponse(
+                token,
+                user.getName(),
+                user.getEmail(),
+                user.getRole().name()
+        );
     }
 }
