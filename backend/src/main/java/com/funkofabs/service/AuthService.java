@@ -26,6 +26,7 @@ public class AuthService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .phone(request.getPhone())
+                .photoUrl(request.getPhotoUrl())
                 .build();
         userRepository.save(user);
 

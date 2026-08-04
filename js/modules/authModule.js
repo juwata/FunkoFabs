@@ -1,5 +1,5 @@
 import { AuthService } from '../service/authService.js';
-import { mostrarErro, mostrarSucesso, limparFeedback } from '../components/feedbackUI.js';
+import { mostrarErro, mostrarSucesso, mostrarLoading, limparFeedback } from '../components/feedbackUI.js';
 
 export async function processarCadastro(dados, botaoSubmit) {
     try {

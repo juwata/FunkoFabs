@@ -35,8 +35,9 @@ input , select{
 
 .cam {
     background: var(--black);
-    width: 100%; height: 200px;
-    max-width: 500px;
+    width: 100%; 
+    aspect-ratio: 1 / 1; /* Deixa perfeitamente quadrada */
+    max-width: 350px; /* Limitando a largura máxima para não ficar gigantesca no PC */
     border-radius: 10px;
     color: var(--white);
     display: flex;

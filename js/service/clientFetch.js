@@ -43,7 +43,10 @@ export async function request(endpoint, options = {}) {
             localStorage.removeItem('funkofabs_token');
             localStorage.removeItem('funkofabs_user'); 
             
-            window.location.href = '/login.html'; 
+            // Garante que o caminho funcione independente se está na home ou na pasta pages
+            window.location.href = window.location.pathname.includes('/pages/') 
+                ? 'login.html' 
+                : 'pages/login.html'; 
             
             throw new ApiError('Sessão expirada. Faça login novamente.', response.status);
         }

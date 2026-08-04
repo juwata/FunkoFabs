@@ -73,13 +73,25 @@ export function mostrarLoading(containerId = null) {
     const div = containerId ? document.getElementById(containerId) : garantirDivGlobal();
     
     if (div) {
+        div.textContent = ''; // Limpa o conteúdo anterior
+        
+        const wrapper = document.createElement('div');
+        wrapper.style.display = 'flex';
+        wrapper.style.justifyContent = 'center';
+        wrapper.style.alignItems = 'center';
+        wrapper.style.width = '100%';
+        wrapper.style.gridColumn = '1 / -1';
+        wrapper.style.padding = '40px 0';
+
+        const spinner = document.createElement('div');
+        spinner.className = 'spinner';
+        
         if (!containerId || div.classList.contains('feedback-msg') || containerId === 'mensagem-erro-global') {
-            div.className = 'feedback-msg'; // Classe padrão (sem cor de erro ou sucesso)
+            div.className = 'feedback-msg'; 
             div.style.display = 'block';
-            div.textContent = 'Carregando...';
-        } else {
-            // Caso seja um container normal (ex: vitrine), só limpa e escreve
-            div.textContent = 'Carregando...';
         }
+        
+        wrapper.appendChild(spinner);
+        div.appendChild(wrapper);
     }
 }

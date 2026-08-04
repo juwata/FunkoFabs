@@ -40,6 +40,9 @@ public class User {
     @Builder.Default
     private Role role = Role.CUSTOMER;
 
+    @Column(name = "foto_url")
+    private String photoUrl;
+
     @Column(name = "data_cadastro", insertable = false, updatable = false)
     private LocalDateTime createdAt;
 

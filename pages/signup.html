@@ -34,11 +34,13 @@
             <h1>cadastro</h1>
             <p>Entre já para o FabVerso!</p>
         </section>
-        <form method="post">
-            <div class="cam">
-                <img src="../assets/icons/cam.svg" alt="">
-                <p>Escolha sua melhor foto! <br> (ou não também)</p>
-            </div>
+        <form id="form-cadastro">
+            <label class="cam" id="container-foto" for="input-foto" style="cursor: pointer;" title="Clique para escolher uma foto">
+                <input type="file" id="input-foto" accept="image/*" style="display: none;">
+                <img src="../assets/icons/cam.svg" id="preview-foto" alt="Sua foto de perfil">
+                <p id="texto-foto">Escolha sua melhor foto! <br> (ou não também)</p>
+            </label>
+            <button type="button" id="btn-remover-foto" style="display: none; background: transparent; border: none; color: #ff4d4d; cursor: pointer; font-size: 14px; text-decoration: underline; margin-top: -15px; margin-bottom: 15px;">Remover foto</button>
             <input type="text" required placeholder="Nome completo" autocapitalize autofocus autocomplete="name">
             <input type="email" required placeholder="E-mail" autocomplete="email">
             <input type="password" required placeholder="Senha" autocomplete="new-password">
@@ -47,7 +49,7 @@
                 <option hidden value="">Forma de pagamento</option>
                 <option value="pix">Pix</option>
             </select>
-            <button type="submit" class="bt-blue">Confirmar</button>
+            <button type="button" id="btn-submit-form" class="bt-blue">Confirmar</button>
         </form>
     </main>
     <a href="login.html" class="downlink">Já possui conta? Faça seu login!</a>

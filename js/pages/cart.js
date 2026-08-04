@@ -21,22 +21,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Se clicou na lixeira
             if (evento.target.classList.contains('btn-excluir')) {
-                if (confirm("Deseja realmente remover este item do carrinho?")) {
-                    removerItem(itemId, article);
-                }
+                removerItem(itemId, article);
             }
 
             // Se clicou no mais (+)
             if (evento.target.classList.contains('btn-mais')) {
-                const qtdAtual = parseInt(article.querySelector('.inp-box p:nth-child(2)').textContent);
-                alterarQuantidade(itemId, qtdAtual + 1);
+                const pQtd = article.querySelector('.inp-box p:nth-child(2)');
+                const qtdAtual = parseInt(pQtd.textContent);
+                alterarQuantidade(itemId, qtdAtual + 1, pQtd);
             }
 
             // Se clicou no menos (-)
             if (evento.target.classList.contains('btn-menos')) {
-                const qtdAtual = parseInt(article.querySelector('.inp-box p:nth-child(2)').textContent);
+                const pQtd = article.querySelector('.inp-box p:nth-child(2)');
+                const qtdAtual = parseInt(pQtd.textContent);
                 if (qtdAtual > 1) {
-                    alterarQuantidade(itemId, qtdAtual - 1);
+                    alterarQuantidade(itemId, qtdAtual - 1, pQtd);
                 }
             }
         });

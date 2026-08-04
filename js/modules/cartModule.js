@@ -1,9 +1,18 @@
-import { CartService } from '../api/cartService.js';
+import { CartService } from '../service/cartService.js';
 import { mostrarErro, mostrarLoading, limparFeedback } from '../components/feedbackUI.js';
 
-export async function carregarCarrinho() {
+export async function carregarCarrinho(silencioso = false) {
     const containerId = 'carrinho-lista';
-    mostrarLoading(containerId);
+
+    // Se nem tiver token salvo, já expulsa para o login instantaneamente
+    if (!localStorage.getItem('funkofabs_token')) {
+        window.location.href = 'login.html';
+        return;
+    }
+
+    if (!silencioso) {
+        mostrarLoading(containerId);
+    }
 
     try {
         const carrinho = await CartService.listarCarrinho();
@@ -11,11 +20,55 @@ export async function carregarCarrinho() {
         container.textContent = ''; 
 
         if (!carrinho || !carrinho.items || carrinho.items.length === 0) {
-            container.textContent = 'Seu carrinho está vazio. Vá para o catálogo!';
-            document.getElementById('carrinho-total').textContent = 'R$ 0,00';
-            document.getElementById('btn-finalizar').style.display = 'none';
+            container.textContent = ''; 
+            
+            const divEmpty = document.createElement('div');
+            divEmpty.style.textAlign = 'center';
+            divEmpty.style.padding = '50px 20px';
+            divEmpty.style.width = '100%';
+            divEmpty.style.gridColumn = '1 / -1'; 
+
+            const imgEmpty = document.createElement('img');
+            imgEmpty.src = '../assets/icons/cart.svg';
+            imgEmpty.alt = 'Carrinho vazio';
+            imgEmpty.style.width = '80px';
+            imgEmpty.style.opacity = '0.5';
+            imgEmpty.style.marginBottom = '20px';
+
+            const h2Empty = document.createElement('h2');
+            h2Empty.textContent = 'Seu carrinho está vazio!';
+            h2Empty.style.marginBottom = '15px';
+            h2Empty.style.color = 'var(--black)';
+            h2Empty.style.border = 'none';
+            h2Empty.style.width = '100%';
+            h2Empty.style.textAlign = 'center';
+
+            const pEmpty = document.createElement('p');
+            pEmpty.textContent = 'Que tal adicionar alguns FunkoFabs incríveis?';
+            pEmpty.style.marginBottom = '30px';
+            pEmpty.style.color = '#666';
+
+            const btnEmpty = document.createElement('button');
+            btnEmpty.className = 'bt-blue';
+            btnEmpty.textContent = 'Ir para o Catálogo';
+            btnEmpty.style.padding = '10px 30px';
+            btnEmpty.style.borderRadius = '20px';
+            btnEmpty.style.cursor = 'pointer';
+            btnEmpty.addEventListener('click', () => {
+                window.location.href = 'catalog.html';
+            });
+
+            divEmpty.append(imgEmpty, h2Empty, pEmpty, btnEmpty);
+            container.appendChild(divEmpty);
+
+            const divBuy = document.querySelector('.buy');
+            if (divBuy) divBuy.style.display = 'none';
             return;
         }
+
+        const divBuy = document.querySelector('.buy');
+        if (divBuy) divBuy.style.display = 'flex';
+
 
         const fragmento = document.createDocumentFragment();
         let valorTotal = 0;
@@ -52,20 +105,25 @@ export async function removerItem(itemId, articleElement) {
         articleElement.style.opacity = '0.5'; 
         await CartService.removerItemCart(itemId);
         
-        carregarCarrinho();
+        carregarCarrinho(true); // Recarrega silenciosamente
     } catch (erro) {
         articleElement.style.opacity = '1';
         mostrarErro(erro.message || "Erro ao remover item.");
     }
 }
 
-export async function alterarQuantidade(itemId, novaQtd) {
+export async function alterarQuantidade(itemId, novaQtd, pQtdElement = null) {
     try {
         limparFeedback();
+        if (pQtdElement) {
+            // Coloca um spinner pequenininho diretamente no número
+            pQtdElement.innerHTML = '<div class="spinner" style="width: 15px; height: 15px; border-width: 2px; margin: 0;"></div>';
+        }
         await CartService.atualizarQuantidade(itemId, novaQtd);
-        carregarCarrinho();
+        carregarCarrinho(true); // Recarrega silenciosamente
     } catch (erro) {
         mostrarErro(erro.message || "Erro ao atualizar quantidade.");
+        carregarCarrinho(true); // Recarrega para voltar o numero original caso falhe
     }
 }
 

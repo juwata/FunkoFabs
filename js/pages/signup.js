@@ -2,23 +2,78 @@ import { processarCadastro } from '../modules/authModule.js';
 import { mostrarErro, limparFeedback } from '../components/feedbackUI.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const formCadastro = document.querySelector('.signup form');
 
-    if (formCadastro) {
-        formCadastro.addEventListener('submit', (evento) => {
-            evento.preventDefault();
+    let fotoBase64 = null;
+    let fotoArquivo = null; // Armazena o arquivo real para envio ao Cloudinary
+
+    // Lógica para Upload e Preview da Foto de Perfil
+    const containerFoto = document.getElementById('container-foto');
+    const inputFoto = document.getElementById('input-foto');
+    const previewFoto = document.getElementById('preview-foto');
+    const textoFoto = document.getElementById('texto-foto');
+    const btnRemoverFoto = document.getElementById('btn-remover-foto');
+
+    if (containerFoto && inputFoto) {
+        inputFoto.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const leitor = new FileReader();
+                fotoArquivo = file; 
+                leitor.onload = function(evento) {
+                    fotoBase64 = evento.target.result;
+                    previewFoto.src = fotoBase64;      
+                    previewFoto.style.width = '100%';
+                    previewFoto.style.height = '100%';
+                    previewFoto.style.borderRadius = '10px';
+                    previewFoto.style.objectFit = 'cover';
+                    textoFoto.style.display = 'none';
+                    
+                    if (btnRemoverFoto) btnRemoverFoto.style.display = 'block';
+                };
+                leitor.readAsDataURL(file);
+            }
+        });
+
+        if (btnRemoverFoto) {
+            btnRemoverFoto.addEventListener('click', () => {
+                fotoArquivo = null;
+                fotoBase64 = null;
+                inputFoto.value = ''; // Limpa o input nativo
+                previewFoto.src = '../assets/icons/cam.svg';
+                previewFoto.style.width = '';
+                previewFoto.style.height = '';
+                previewFoto.style.borderRadius = '';
+                previewFoto.style.objectFit = '';
+                textoFoto.style.display = 'block';
+                textoFoto.innerHTML = 'Escolha sua melhor foto! <br> (ou não também)';
+                btnRemoverFoto.style.display = 'none';
+            });
+        }
+    }
+
+    const formCadastro = document.getElementById('form-cadastro');
+    const btnSubmit = document.getElementById('btn-submit-form');
+
+    if (btnSubmit && formCadastro) {
+        btnSubmit.addEventListener('click', async () => {
+            console.log("CLIQUE DETECTADO! Iniciando validações...");
             limparFeedback(); 
 
+            // Como tiramos o form nativo, forçamos a validação do HTML5
+            if (!formCadastro.checkValidity()) {
+                formCadastro.reportValidity();
+                return;
+            }
+
             const dadosRegistro = {
-                name: formCadastro.querySelectorAll('input')[0].value.trim(),
-                email: formCadastro.querySelectorAll('input')[1].value.trim(),
-                password: formCadastro.querySelectorAll('input')[2].value,
-                phone: formCadastro.querySelectorAll('input')[3].value.trim()
+                name: formCadastro.querySelectorAll('input:not([type="file"])')[0].value.trim(),
+                email: formCadastro.querySelectorAll('input:not([type="file"])')[1].value.trim(),
+                password: formCadastro.querySelectorAll('input:not([type="file"])')[2].value,
+                phone: formCadastro.querySelectorAll('input:not([type="file"])')[3].value.trim(),
+                photoUrl: null 
             };
 
-            // ---- INÍCIO DAS VALIDAÇÕES CUSTOMIZADAS ---- //
             
-            // 1. Validação de Nome (precisa ter sobrenome)
             if (dadosRegistro.name.split(' ').length < 2) {
                 mostrarErro("Por favor, digite seu nome e sobrenome.");
                 return;
@@ -31,24 +86,47 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // 3. Validação de Senha (Mín 6 caracteres + Pelo menos 1 número)
             const temNumero = /\d/.test(dadosRegistro.password);
             if (dadosRegistro.password.length < 6 || !temNumero) {
                 mostrarErro("A senha deve ter no mínimo 6 caracteres e conter pelo menos um número.");
                 return;
             }
 
-            // 4. Validação de Telefone (Mín 10 dígitos)
             const apenasNumeros = dadosRegistro.phone.replace(/\D/g, '');
             if (apenasNumeros.length < 10) {
                 mostrarErro("Digite um telefone válido com DDD (mínimo 10 números).");
                 return; 
             }
 
-            // ---- FIM DAS VALIDAÇÕES ---- //
 
-            // Passou em todos os testes! Pode mandar para a API:
-            const btnSubmit = formCadastro.querySelector('button[type="submit"]');
+            if (fotoArquivo) {
+                try {
+                    btnSubmit.disabled = true;
+                    btnSubmit.textContent = 'Enviando foto...';
+
+                    const formData = new FormData();
+                    formData.append('file', fotoArquivo);
+                    formData.append('upload_preset', 'funko_preset');
+
+                    const respostaCloudinary = await fetch('https://api.cloudinary.com/v1_1/dbzjr0aqn/image/upload', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (respostaCloudinary.ok) {
+                        const dadosCloudinary = await respostaCloudinary.json();
+                        dadosRegistro.photoUrl = dadosCloudinary.secure_url; // Pega o link seguro da nuvem
+                    } else {
+                        mostrarErro("Aviso: Falha ao fazer upload da foto. Cadastro seguirá sem foto.");
+                    }
+                } catch (e) {
+                    mostrarErro("Aviso: Falha de conexão com o Cloudinary.");
+                } finally {
+                    btnSubmit.disabled = false;
+                    btnSubmit.textContent = 'Confirmar';
+                }
+            }
+
             processarCadastro(dadosRegistro, btnSubmit);
         });
     }

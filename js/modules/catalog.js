@@ -1,4 +1,4 @@
-import { ProductsService } from "../api/productsService.js";
+import { ProductsService } from "../service/productsService.js";
 import { mostrarLoading, mostrarErro } from "../components/feedbackUI.js";
 
 export async function inicializarCatalogo() {

@@ -1,5 +1,5 @@
-import { ProductsService } from '../api/productsService.js'; // Ajustado path
-import { CartService } from '../api/cartService.js';
+import { ProductsService } from '../service/productsService.js'; // Ajustado path
+import { CartService } from '../service/cartService.js';
 import { mostrarErro, mostrarLoading, mostrarSucesso } from '../components/feedbackUI.js';
 
 export async function carregarDetalhesProduto(idProduto) {
@@ -33,19 +33,12 @@ export async function carregarDetalhesProduto(idProduto) {
 export async function adicionarAoCarrinho(productId, quantity, btnSubmit) {
     try {
         btnSubmit.disabled = true;
-        btnSubmit.innerHTML = 'Adicionando...';
+        btnSubmit.innerHTML = '<div class="spinner" style="width: 20px; height: 20px; border-width: 3px; border-left-color: white; margin: 0;"></div>';
 
         // Chama a API com o Token
         await CartService.adicionarItem({ productId, quantity });
 
         mostrarSucesso("Produto adicionado ao carrinho!");
-        
-        // UX extra: Pergunta se quer ir para o carrinho
-        setTimeout(() => {
-            if(confirm("Produto adicionado! Deseja ir para o carrinho?")) {
-                window.location.href = 'cart.html';
-            }
-        }, 500);
 
     } catch (erro) {
         mostrarErro(erro.message || "Erro ao adicionar ao carrinho.");
