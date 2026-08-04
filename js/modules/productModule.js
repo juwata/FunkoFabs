@@ -4,7 +4,6 @@ import { mostrarErro, mostrarLoading, mostrarSucesso } from '../components/feedb
 
 export async function carregarDetalhesProduto(idProduto) {
     const containerId = 'detalhes-produto';
-    mostrarLoading(containerId);
 
     try {
         const produto = await ProductsService.buscarPorId(idProduto);

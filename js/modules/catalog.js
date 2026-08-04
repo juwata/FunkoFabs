@@ -27,7 +27,6 @@ export async function inicializarCatalogo() {
         container.appendChild(fragmento);
 
     } catch (erro) {
-        // Limpa o texto de 'Carregando...' da vitrine principal e centraliza o erro
         const container = document.getElementById(idContainer);
         if (container) {
             container.textContent = '';
@@ -39,7 +38,6 @@ export async function inicializarCatalogo() {
             container.appendChild(p);
         }
 
-        // Mostra o pop-up (Toast) vermelho no canto da tela omitindo o segundo parâmetro
         mostrarErro("Não foi possível carregar a vitrine de produtos.");
     }
 }
@@ -52,15 +50,15 @@ function criarCardProduto(produto) {
     const a = document.createElement('a');
 
     const img = document.createElement('img');
-    img.src = produto.imagemUrl || 'assets/img/placeholder.png'; 
-    img.alt = `Funko Pop: ${produto.nome}`;
+    img.src = produto.imageUrl || 'assets/img/placeholder.png'; 
+    img.alt = `Funko Pop: ${produto.name}`;
     img.loading = 'lazy'; 
 
     const titulo = document.createElement('p');
-    titulo.textContent = produto.nome;
+    titulo.textContent = produto.name;
 
     const preco = document.createElement('p');
-    preco.textContent = `R$ ${produto.preco.toFixed(2)}`;
+    preco.textContent = `R$ ${produto.price.toFixed(2)}`;
 
     a.dataset.id = produto.id; 
     a.href = `product.html?id=${produto.id}`;
