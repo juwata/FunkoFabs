@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/form.css">
+    <script type="module" src="../js/pages/signup.js" defer></script>
     <title>FunkoFabs</title>
 </head>
 <body>
@@ -41,7 +42,7 @@
             <input type="text" required placeholder="Nome completo" autocapitalize autofocus autocomplete="name">
             <input type="email" required placeholder="E-mail" autocomplete="email">
             <input type="password" required placeholder="Senha" autocomplete="new-password">
-            <input type="tel" required placeholder="Telefone" autocomplete="tel">
+            <input type="tel" id="iTel" required placeholder="Telefone" autocomplete="tel">
             <select id="payment" required>
                 <option hidden value="">Forma de pagamento</option>
                 <option value="pix">Pix</option>
@@ -50,7 +51,7 @@
         </form>
     </main>
     <a href="login.html" class="downlink">Já possui conta? Faça seu login!</a>
-
+    <script src="../scripts/perfil.js"></script>
     <script src="../scripts/script.js"></script>
 </body>
 </html>

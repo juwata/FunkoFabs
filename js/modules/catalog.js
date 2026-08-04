@@ -1,42 +1,35 @@
-import { ProductsService } from "../service/productsService";
-
-import { mostrarLoading, mostrarErro } from "../components/feedbackUI";
+import { ProductsService } from "../service/productsService.js";
+import { mostrarLoading, mostrarErro } from "../components/feedbackUI.js";
 
 export async function inicializarCatalogo() {
-    // O ID exato da div onde os produtos vão aparecer no seu index.html
     const idContainer = 'vitrine'; 
     
-    // 1. Mostra estado de carregamento
     mostrarLoading(idContainer);
 
     try {
         const produtos = await ProductsService.listarProdutos();
         
         const container = document.getElementById(idContainer);
-        container.textContent = ''; // Limpa o "Carregando..." de forma segura
+        container.textContent = ''; 
 
-        // 3. Trata estado vazio
         if (!produtos || produtos.length === 0) {
             container.textContent = 'Nenhum Action Figure disponível no momento.';
             return;
         }
 
-        // 4. Cria um fragmento (melhor prática de performance)
         const fragmento = document.createDocumentFragment();
 
-        // 5. Monta cada card e adiciona ao fragmento
         produtos.forEach(produto => {
             const card = criarCardProduto(produto);
             fragmento.appendChild(card);
         });
 
-        // 6. Injeta tudo no DOM de uma única vez
         container.appendChild(fragmento);
 
     } catch (erro) {
-        // 7. Trata o erro visivelmente para o usuário
-        mostrarErro(idContainer, "Não foi possível carregar a vitrine de produtos.");
-        console.error(erro);
+        // Passando a mensagem primeiro e o id do container depois, conforme o novo feedbackUI
+        mostrarErro("Não foi possível carregar a vitrine de produtos.", idContainer);
+        // console.error(erro); -> Removido para seguir a regra de Higiene de Código
     }
 }
 

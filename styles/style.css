@@ -138,7 +138,30 @@ nav > ul > li {
     list-style: none;
 }
 
-
+/* Base para a mensagem de feedback */
+.feedback-msg {
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+    /* Transição suave para quando ela aparecer */
+    transition: all 0.3s ease; 
+}
+/* Estilo para erros (Vermelho) */
+.feedback-msg.error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+/* Estilo para sucesso (Verde) */
+.feedback-msg.success {
+    background-color: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+}
 
 @media (max-width: 767px) {
     header.hide {
