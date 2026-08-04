@@ -1,0 +1,38 @@
+main {
+    width: 95dvw;
+    margin: 30px auto;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    row-gap: 25px;
+}
+
+section img {
+    width: 180px;
+    height: 180px;
+}
+
+section p:first-of-type {
+    font-weight: bold;
+}
+
+section p:last-of-type {
+    color: var(--price);
+}
+
+
+
+@media (min-width: 992px) {
+    section img {
+        width: 300px;
+        height: 300px;
+    }
+
+    main {
+        width: 80dvw;
+        gap: 10px;
+        row-gap: 90px;
+    }
+}
