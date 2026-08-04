@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/finalize-info.css">
+    <title>FunkoFabs</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../assets/logo-black.svg" id="header-logo" alt="">
+            <nav class="pc">
+                <ul>
+                    <li><a href="../index.html">Início</a></li>
+                    <li><a href="catalog.html">Catálogo</a></li>
+                    <li><a href="create.html">Crie o seu</a></li>
+                    <li><a href="../index.html#slide3">Avaliações</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="pc actions">
+            <a href="cart.html"><img src="../assets/icons/cart.svg" alt=""></a>
+            <a href="perfil.html"><img src="../assets/icons/perfil.svg" alt=""></a>
+        </div>
+        <a href="nav.html" class="mb"><img src="../assets/icons/menu.svg" alt=""></a>
+    </header>
+
+    <div class="title">
+        <h1>Finalização</h1>
+        <p>Já já seus FunkoFabs chegam à você!</p>
+    </div>
+
+    <main>
+        <section>
+            <div class="head">
+                <img src="../assets/icons/local.svg" alt="">
+                <h3>Endereço</h3>
+            </div>
+
+            <form method="post">
+                <input type="text" placeholder="CEP" id="iCEP" autofocus>
+                <input type="text" placeholder="Rua">
+                <input type="number" placeholder="Número">
+                <input type="text" placeholder="Cidade">
+                <input type="text" placeholder="Estado">
+            </form>
+        </section>
+
+        <section>
+            <div class="head">
+                <img src="../assets/icons/card.svg" alt="">
+                <h3>Forma de pagamento</h3>
+            </div>
+            <div class="pix">
+                <input type="radio" id="iPix">
+                <label for="iPix"><img src="../assets/icons/pix.svg" alt="">Pix</label>
+            </div>
+        </section>
+
+        <section>
+            <div class="head">
+                <img src="../assets/icons/cart.svg" alt="">
+                <h3>Resumo da compra</h3>
+            </div>
+            <table>
+                <tr>
+                    <td>Subtotal</td>
+                    <td>R$120410</td>
+                </tr>
+                <tr>
+
+                </tr>
+            </table>
+        </section>
+
+        <a href="finalize-pay.html"><button class="bt-blue">confirmar</button></a>
+    </main>   
+
+    <script src="../scripts/script.js"></script>
+    <script src="../scripts/finalize.js"></script>
+</body>
+</html>

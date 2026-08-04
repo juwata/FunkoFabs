@@ -47,11 +47,11 @@ form {
 
 .inp-box {
     display: flex;
+    align-items: center;
     gap: 25px;
     border: 2px solid var(--black);
     width: fit-content;
     padding: 8px 15px;
-    align-items: center;
 }
 
 .inp-box > p {

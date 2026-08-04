@@ -1,0 +1,36 @@
+body {
+    margin-top: 100px;
+}
+
+.title {
+    width: 90dvw;
+    max-width: 500px;
+}
+
+.title button {
+    margin-top: 10px;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+main img {
+    width: 90dvw;
+    max-width: 450px;
+}
+
+@media (min-width: 992px) {
+    body {
+        margin-top: 120px;
+    }
+
+    main {
+        margin-top: 200px;
+        gap: 200px;
+    }
+}
