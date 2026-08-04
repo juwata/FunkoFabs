@@ -1,4 +1,4 @@
-import { ProductsService } from "../service/productsService.js";
+import { ProductsService } from "../api/productsService.js";
 import { mostrarLoading, mostrarErro } from "../components/feedbackUI.js";
 
 export async function inicializarCatalogo() {
@@ -27,9 +27,20 @@ export async function inicializarCatalogo() {
         container.appendChild(fragmento);
 
     } catch (erro) {
-        // Passando a mensagem primeiro e o id do container depois, conforme o novo feedbackUI
-        mostrarErro("Não foi possível carregar a vitrine de produtos.", idContainer);
-        // console.error(erro); -> Removido para seguir a regra de Higiene de Código
+        // Limpa o texto de 'Carregando...' da vitrine principal e centraliza o erro
+        const container = document.getElementById(idContainer);
+        if (container) {
+            container.textContent = '';
+            const p = document.createElement('p');
+            p.textContent = 'Indisponível no momento.';
+            p.style.textAlign = 'center';
+            p.style.width = '100%';
+            p.style.gridColumn = '1 / -1';
+            container.appendChild(p);
+        }
+
+        // Mostra o pop-up (Toast) vermelho no canto da tela omitindo o segundo parâmetro
+        mostrarErro("Não foi possível carregar a vitrine de produtos.");
     }
 }
 
@@ -52,6 +63,7 @@ function criarCardProduto(produto) {
     preco.textContent = `R$ ${produto.preco.toFixed(2)}`;
 
     a.dataset.id = produto.id; 
+    a.href = `product.html?id=${produto.id}`;
 
     a.append(img, titulo, preco);
     

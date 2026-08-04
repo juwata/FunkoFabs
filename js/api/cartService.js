@@ -1,4 +1,4 @@
-import { request } from "./clientFetch";
+import { request } from "./clientFetch.js";
 
 /**
  * Objeto responsável por todas as requisições referentes a "Cart".
@@ -9,8 +9,8 @@ export const CartService = {
         return await request('/cart')
     },
     
-    buscarPorId: async (dadosCart) => {
-        return await request('/produtos/cart/items', {
+    adicionarItem: async (dadosCart) => {
+        return await request('/cart/items', {
             method: 'POST',
             body: JSON.stringify(dadosCart)
         });
@@ -23,10 +23,8 @@ export const CartService = {
     },
 
     removerItemCart: async(id) => {
-        return await request(`/cart/items/{id}`, {
+        return await request(`/cart/items/${id}`, {
             method: 'DELETE'
         })
     }
-
-    
 };

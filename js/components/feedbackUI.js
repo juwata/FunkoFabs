@@ -12,13 +12,18 @@ function garantirDivGlobal() {
         divErro.id = 'mensagem-erro-global';
         divErro.role = 'alert'; // Acessibilidade obrigatória (leitor de tela)
         
-        // Adiciona um estilo flutuante (Toast)
         divErro.style.position = 'fixed';
-        divErro.style.top = '20px';
+        divErro.style.bottom = '20px';
         divErro.style.right = '20px';
         divErro.style.zIndex = '9999';
         divErro.style.display = 'none';
         divErro.style.minWidth = '300px';
+        divErro.style.maxWidth = '400px';
+        divErro.style.width = 'auto';
+        divErro.style.margin = '0';
+        divErro.style.padding = '15px';
+        divErro.style.borderRadius = '8px';
+        divErro.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
         
         // Insere a div direto no <body>
         document.body.appendChild(divErro);
