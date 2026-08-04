@@ -16,7 +16,14 @@ public class CartService {
 
     public Cart getCart(String email) {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-        return cartRepository.findByUser(user).orElseGet(() -> cartRepository.save(Cart.builder().user(user).build()));
+        return cartRepository.findByUser(user)
+                .orElseGet(() -> {
+                    Cart cart = Cart.builder()
+                            .user(user)
+                            .build();
+
+                    return cartRepository.save(cart);
+                });
     }
 
     @Transactional

@@ -8,27 +8,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "orders")
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
+@Table(name = "compras")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Order {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_compra")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "id_usuario", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true) @Builder.Default
+    @OneToMany(mappedBy = "order",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @Builder.Default
     private List<OrderItem> items = new ArrayList<>();
 
-    @Column(nullable = false, precision = 10, scale = 2)
+    @Column(name = "valor_total", nullable = false)
     private BigDecimal total;
 
-    @Enumerated(EnumType.STRING) @Column(nullable = false) @Builder.Default
-    private Status status = Status.PENDING;
+    @Column(name = "status")
+    private String status = "pendente";
 
-    @Column(nullable = false, updatable = false) @Builder.Default
-    private LocalDateTime createdAt = LocalDateTime.now();
-
-    public enum Status { PENDING, CONFIRMED, SHIPPED, DELIVERED, CANCELLED }
+    @Column(name = "data_compra", insertable = false, updatable = false)
+    private LocalDateTime createdAt;
 }

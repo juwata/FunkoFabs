@@ -44,6 +44,6 @@ public class AdminController {
 
     @PutMapping("/orders/{id}/status")
     public ResponseEntity<OrderResponse> updateOrderStatus(@PathVariable Long id, @RequestParam String status) {
-        return ResponseEntity.ok(orderService.updateStatus(id, Order.Status.valueOf(status)));
+        return ResponseEntity.ok(orderService.updateStatus(id, status));
     }
 }

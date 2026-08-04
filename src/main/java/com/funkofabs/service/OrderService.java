@@ -49,7 +49,7 @@ public class OrderService {
         return orderRepository.findByUserOrderByCreatedAtDesc(user).stream().map(this::toResponse).collect(Collectors.toList());
     }
 
-    public OrderResponse updateStatus(Long orderId, Order.Status status) {
+    public OrderResponse updateStatus(Long orderId, String status) {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
         order.setStatus(status);
         return toResponse(orderRepository.save(order));
@@ -60,7 +60,7 @@ public class OrderService {
     }
 
     private OrderResponse toResponse(Order o) {
-        return OrderResponse.builder().id(o.getId()).total(o.getTotal()).status(o.getStatus().name())
+        return OrderResponse.builder().id(o.getId()).total(o.getTotal()).status(o.getStatus())
                 .createdAt(o.getCreatedAt())
                 .items(o.getItems().stream().map(i -> OrderResponse.OrderItemResponse.builder()
                         .productId(i.getProduct().getId()).productName(i.getProduct().getName())
