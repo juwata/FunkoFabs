@@ -8,3 +8,5 @@
 /dataSources.local.xml
 target/
 *.class
+src/main/resources/application.properties
+src/main/resources/application-prod.properties
