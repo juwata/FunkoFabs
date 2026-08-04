@@ -72,7 +72,6 @@ button {
     border-radius: 100px;
     font-weight: bold;
     text-transform: uppercase;
-    text-decoration: none;
     letter-spacing: -6%;
     cursor: pointer;
 }
@@ -122,6 +121,10 @@ header.light .actions img, header.light .mb img {
     filter: brightness(0) invert(1);
 }
 
+header:not(.light) {
+    background: linear-gradient(var(--white) 60%, transparent);
+}
+
 header .pc {display: none}
 
 
@@ -129,7 +132,7 @@ header .pc {display: none}
 .title {text-align: center}
 
 
-input , select{
+input:not([type="radio"]), select{
     width: 90dvw;
     max-width: 500px;
     border: 1px solid var(--black);
