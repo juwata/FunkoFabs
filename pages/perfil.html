@@ -34,7 +34,8 @@
     </div>
 
     <main>
-        <img src="../assets/images/FabsCadeirante.webp" alt="">
+        <img src="../assets/images/FabsCadeirante.webp" id="foto-perfil" alt="Sua foto" style="cursor: pointer;" title="Clique para trocar sua foto">
+        <input type="file" id="input-foto" accept="image/*" style="display: none;">
 
         <section>
             <div class="personal">
@@ -43,15 +44,17 @@
             </div>
             <form method="post">
                 <input type="text" placeholder="Nome completo">
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Senha">
+                <input type="email" placeholder="Email" disabled title="Você não pode alterar seu email">
                 <input type="tel" id="iTel" placeholder="Telefone" maxlength="15">
-                <button class="bt-blue">Confirmar</button>
+                <div style="display: flex; gap: 15px; margin-top: 10px;">
+                    <button type="submit" class="bt-blue">Confirmar</button>
+                    <button type="button" id="btn-logout" class="bt-out" style="color: var(--pri); border-color: var(--pri);">Sair da conta</button>
+                </div>
             </form>
         </section>
     </main>
 
     <script src="../scripts/script.js"></script>
-    <script src="../scripts/perfil.js"></script>
+    <script type="module" src="../js/pages/perfil.js"></script>
 </body>
 </html>

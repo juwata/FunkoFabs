@@ -60,4 +60,59 @@ public class AuthService {
                 user.getRole().name()
         );
     }
+
+    public UserResponse getMe() {
+        String email = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuário logado não encontrado"));
+
+        return UserResponse.builder()
+                .name(user.getName())
+                .email(user.getEmail())
+                .phone(user.getPhone())
+                .photoUrl(user.getPhotoUrl())
+                .role(user.getRole().name())
+                .build();
+    }
+
+    public AuthResponse updateMe(UserUpdateRequest request) {
+        String emailContext = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByEmail(emailContext)
+                .orElseThrow(() -> new RuntimeException("Usuário logado não encontrado"));
+
+        if (request.getName() != null && !request.getName().isBlank()) {
+            user.setName(request.getName());
+        }
+
+        if (request.getPhone() != null && !request.getPhone().isBlank()) {
+            user.setPhone(request.getPhone());
+        }
+
+        if (request.getPhotoUrl() != null && !request.getPhotoUrl().isBlank()) {
+            user.setPhotoUrl(request.getPhotoUrl());
+        }
+
+        if (request.getPassword() != null && !request.getPassword().isBlank()) {
+            user.setPassword(passwordEncoder.encode(request.getPassword()));
+        }
+
+        if (request.getEmail() != null && !request.getEmail().isBlank() && !request.getEmail().equals(user.getEmail())) {
+            if (userRepository.existsByEmail(request.getEmail())) {
+                throw new RuntimeException("E-mail já está em uso por outra conta.");
+            }
+            user.setEmail(request.getEmail());
+        }
+
+        userRepository.save(user);
+
+        // Gera novo token porque o email pode ter mudado
+        String token = jwtUtil.generateToken(user.getEmail(), user.getRole().name());
+
+        return new AuthResponse(
+                token,
+                user.getName(),
+                user.getEmail(),
+                user.getRole().name()
+        );
+    }
 }

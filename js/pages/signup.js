@@ -6,6 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
     let fotoBase64 = null;
     let fotoArquivo = null; // Armazena o arquivo real para envio ao Cloudinary
 
+    // Configurar formatador de telefone
+    const inputTelefone = document.getElementById('iTel');
+    if (inputTelefone) {
+        inputTelefone.addEventListener('input', (e) => {
+            let valor = e.target.value.replace(/\D/g, ''); 
+            if (valor.length > 11) valor = valor.slice(0, 11); 
+            valor = valor.replace(/^(\d{2})(\d)/, '($1) $2'); 
+            valor = valor.replace(/(\d{5})(\d)/, '$1-$2'); 
+            e.target.value = valor; 
+        });
+    }
+
     // Lógica para Upload e Preview da Foto de Perfil
     const containerFoto = document.getElementById('container-foto');
     const inputFoto = document.getElementById('input-foto');
@@ -56,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (btnSubmit && formCadastro) {
         btnSubmit.addEventListener('click', async () => {
-            console.log("CLIQUE DETECTADO! Iniciando validações...");
             limparFeedback(); 
 
             // Como tiramos o form nativo, forçamos a validação do HTML5
@@ -87,8 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const temNumero = /\d/.test(dadosRegistro.password);
-            if (dadosRegistro.password.length < 6 || !temNumero) {
-                mostrarErro("A senha deve ter no mínimo 6 caracteres e conter pelo menos um número.");
+            const temEspecial = /[!@#$%^&*(),.?":{}|<>]/.test(dadosRegistro.password);
+            
+            if (dadosRegistro.password.length < 6 || !temNumero || !temEspecial) {
+                mostrarErro("A senha deve ter no mínimo 6 caracteres, 1 número e 1 especial.");
                 return;
             }
 
@@ -115,12 +128,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (respostaCloudinary.ok) {
                         const dadosCloudinary = await respostaCloudinary.json();
-                        dadosRegistro.photoUrl = dadosCloudinary.secure_url; // Pega o link seguro da nuvem
+                        dadosRegistro.photoUrl = dadosCloudinary.secure_url; 
                     } else {
-                        mostrarErro("Aviso: Falha ao fazer upload da foto. Cadastro seguirá sem foto.");
+                        const erroCloud = await respostaCloudinary.json();
+                        console.error("Erro Cloudinary:", erroCloud);
+                        mostrarErro(`Falha Cloudinary: ${erroCloud.error.message}`);
+                        btnSubmit.disabled = false;
+                        btnSubmit.textContent = 'Confirmar';
+                        return; // Trava o cadastro se a foto falhar
                     }
                 } catch (e) {
                     mostrarErro("Aviso: Falha de conexão com o Cloudinary.");
+                    btnSubmit.disabled = false;
+                    btnSubmit.textContent = 'Confirmar';
+                    return;
                 } finally {
                     btnSubmit.disabled = false;
                     btnSubmit.textContent = 'Confirmar';
@@ -129,5 +150,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
             processarCadastro(dadosRegistro, btnSubmit);
         });
-    }
-});
+    }}
+);

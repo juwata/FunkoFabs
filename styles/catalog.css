@@ -2,6 +2,21 @@ body {
     margin-top: 120px;
 }
 
+.filtros-catalogo {
+    width: 95dvw;
+    margin: 20px auto 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+
+
+.filtros-catalogo select {
+    cursor: pointer;
+}
+
 main {
     width: 95dvw;
     margin: 30px auto;
@@ -31,10 +46,25 @@ main a p:last-of-type {
 
 
 @media (min-width: 992px) {
+    .filtros-catalogo {
+        width: 70dvw;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .filtros-catalogo input {
+        flex: 1;
+        max-width: none;
+    }
+
+    .filtros-catalogo select {
+        width: 250px;
+        max-width: none;
+    }
+
     main {
         width: 70dvw;
-        gap: 10px;
-        
         grid-template-columns: repeat(4, 1fr);
         gap: 20px;
         row-gap: 50px;

@@ -18,7 +18,19 @@ export const AuthService = {
             method: 'POST',
             body: JSON.stringify(dadosConta)
         });
+    },
+
+    buscarMeuPerfil: async () => {
+        return await request('/auth/me', {
+            method: 'GET'
+        });
+    },
+
+    atualizarMeuPerfil: async (dados) => {
+        return await request('/auth/me', {
+            method: 'PATCH',
+            body: JSON.stringify(dados)
+        });
     }
 
-    
 };

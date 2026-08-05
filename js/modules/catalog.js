@@ -1,30 +1,19 @@
 import { ProductsService } from "../service/productsService.js";
 import { mostrarLoading, mostrarErro } from "../components/feedbackUI.js";
 
+let todosProdutos = [];
+
 export async function inicializarCatalogo() {
     const idContainer = 'vitrine'; 
     
     mostrarLoading(idContainer);
 
     try {
-        const produtos = await ProductsService.listarProdutos();
+        todosProdutos = await ProductsService.listarProdutos();
+        if (!todosProdutos) todosProdutos = [];
         
-        const container = document.getElementById(idContainer);
-        container.textContent = ''; 
-
-        if (!produtos || produtos.length === 0) {
-            container.textContent = 'Nenhum Action Figure disponível no momento.';
-            return;
-        }
-
-        const fragmento = document.createDocumentFragment();
-
-        produtos.forEach(produto => {
-            const card = criarCardProduto(produto);
-            fragmento.appendChild(card);
-        });
-
-        container.appendChild(fragmento);
+        configurarFiltros();
+        renderizarCatalogo(todosProdutos);
 
     } catch (erro) {
         const container = document.getElementById(idContainer);
@@ -40,6 +29,59 @@ export async function inicializarCatalogo() {
 
         mostrarErro("Não foi possível carregar a vitrine de produtos.");
     }
+}
+
+function configurarFiltros() {
+    const searchInput = document.getElementById('search-input');
+    const sortSelect = document.getElementById('sort-select');
+
+    if (searchInput && sortSelect) {
+        let debounceTimer;
+
+        const aplicarFiltros = () => {
+            const texto = searchInput.value.toLowerCase();
+            const ordem = sortSelect.value;
+
+            let filtrados = todosProdutos.filter(p => p.name.toLowerCase().includes(texto));
+
+            if (ordem === 'preco-asc') {
+                filtrados.sort((a, b) => a.price - b.price);
+            } else if (ordem === 'preco-desc') {
+                filtrados.sort((a, b) => b.price - a.price);
+            } else if (ordem === 'nome-asc') {
+                filtrados.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (ordem === 'nome-desc') {
+                filtrados.sort((a, b) => b.name.localeCompare(a.name));
+            }
+
+            renderizarCatalogo(filtrados);
+        };
+
+        searchInput.addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(aplicarFiltros, 300);
+        });
+        
+        sortSelect.addEventListener('change', aplicarFiltros);
+    }
+}
+
+function renderizarCatalogo(produtosParaMostrar) {
+    const container = document.getElementById('vitrine');
+    if (!container) return;
+    
+    container.textContent = '';
+
+    if (!produtosParaMostrar || produtosParaMostrar.length === 0) {
+        container.textContent = 'Nenhum Action Figure encontrado.';
+        return;
+    }
+
+    const fragmento = document.createDocumentFragment();
+    produtosParaMostrar.forEach(produto => {
+        fragmento.appendChild(criarCardProduto(produto));
+    });
+    container.appendChild(fragmento);
 }
 
 /**

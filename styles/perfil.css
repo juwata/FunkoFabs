@@ -14,7 +14,10 @@ main {
 
 main > img {
     width: 100%;
-    max-width: 400px;
+    max-width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .personal {

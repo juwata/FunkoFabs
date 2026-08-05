@@ -38,7 +38,7 @@ export async function request(endpoint, options = {}) {
         const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
 
         // 5. Tratamento de JWT: Erro 401 (Não Autorizado) ou 403 (Proibido)
-        if (response.status === 401 || response.status === 403) {
+        if ((response.status === 401 || response.status === 403) && !endpoint.includes('/login')) {
             // Limpa os rastros da sessão expirada/inválida
             localStorage.removeItem('funkofabs_token');
             localStorage.removeItem('funkofabs_user'); 
@@ -54,13 +54,19 @@ export async function request(endpoint, options = {}) {
         if (!response.ok) {
             let mensagemErro = `Erro inesperado no servidor (Status: ${response.status})`;
             
+            if (response.status === 401 && endpoint.includes('/login')) {
+                mensagemErro = 'E-mail ou senha incorretos.';
+            }
+            
             try {
                 const erroServidor = await response.json();
                 if (erroServidor.message) {
                     mensagemErro = erroServidor.message;
+                } else if (erroServidor.error) {
+                    mensagemErro = erroServidor.error;
                 }
             } catch (e) {
-
+                // Não é JSON, mantém a mensagemErro atual
             }
             
             throw new ApiError(mensagemErro, response.status);

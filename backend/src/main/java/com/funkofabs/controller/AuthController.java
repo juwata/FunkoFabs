@@ -20,4 +20,14 @@ public class AuthController {
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody AuthRequest request) {
         return ResponseEntity.ok(authService.login(request));
     }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserResponse> getMe() {
+        return ResponseEntity.ok(authService.getMe());
+    }
+
+    @PatchMapping("/me")
+    public ResponseEntity<AuthResponse> updateMe(@RequestBody com.funkofabs.dto.UserUpdateRequest request) {
+        return ResponseEntity.ok(authService.updateMe(request));
+    }
 }

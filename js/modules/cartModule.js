@@ -162,28 +162,43 @@ function criarElementoItem(item, subtotal) {
     const divInp = document.createElement('div');
     divInp.className = 'inp-box';
     
-    const btnMenos = document.createElement('p');
+    const btnMenos = document.createElement('button');
+    btnMenos.type = 'button';
     btnMenos.textContent = '-';
     btnMenos.className = 'btn-menos';
     btnMenos.style.cursor = 'pointer';
+    btnMenos.style.background = 'none';
+    btnMenos.style.color = 'inherit';
+    btnMenos.style.font = 'inherit';
 
     const pQtd = document.createElement('p');
     pQtd.textContent = item.quantity;
     
-    const btnMais = document.createElement('p');
+    const btnMais = document.createElement('button');
+    btnMais.type = 'button';
     btnMais.textContent = '+';
     btnMais.className = 'btn-mais';
     btnMais.style.cursor = 'pointer';
+    btnMais.style.background = 'none';
+    btnMais.style.color = 'inherit';
+    btnMais.style.font = 'inherit';
 
     divInp.append(btnMenos, pQtd, btnMais);
+
+    const btnTrash = document.createElement('button');
+    btnTrash.type = 'button';
+    btnTrash.className = 'btn-excluir';
+    btnTrash.style.cursor = 'pointer';
+    btnTrash.style.background = 'none';
 
     const imgTrash = document.createElement('img');
     imgTrash.src = '../assets/icons/trash.svg';
     imgTrash.alt = 'Remover do carrinho';
-    imgTrash.className = 'btn-excluir';
-    imgTrash.style.cursor = 'pointer';
+    imgTrash.style.pointerEvents = 'none'; // Garante que o clique registre no botão pai
 
-    form.append(divInp, imgTrash);
+    btnTrash.appendChild(imgTrash);
+
+    form.append(divInp, btnTrash);
     divContainer.append(divTextos, form);
 
     article.append(a, divContainer);
