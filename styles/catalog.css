@@ -29,11 +29,10 @@ main a p:last-of-type {
 }
 
 .filters {
-    position: absolute;
-    top: 120px;
-    right: 25px;
+    margin: 20px 0 50px 0;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
 }
 
@@ -103,5 +102,11 @@ select {
         grid-template-columns: repeat(4, 1fr);
         gap: 20px;
         row-gap: 50px;
+    }
+
+    .filters {
+        position: absolute;
+        top: 120px;
+        right: 25px;
     }
 }
