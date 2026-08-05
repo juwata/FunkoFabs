@@ -28,6 +28,71 @@ main a p:last-of-type {
     color: var(--price);
 }
 
+.filters {
+    position: absolute;
+    top: 120px;
+    right: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filters label {
+    background: var(--pri);
+    width: fit-content;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 100px;
+}
+
+.filters img {
+    width: 20px;
+}
+
+.search {
+    width: fit-content;
+    padding: 2px 6px;
+    border: 3px solid var(--pri);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.select {
+    position: relative;
+}
+
+#search-input, select, option {
+    width: 300px; height: 50px;
+    outline: none;
+    border: 0;
+    background: transparent;
+}
+
+#sort-select {
+    padding: 20px 0;
+    display: none;
+}
+
+:has(#select-select:checked) #sort-select {
+    display: block;
+}
+
+/* .select:hover #sort-select {
+    display: block;
+} */
+
+select, option {
+    width: fit-content; height: fit-content;
+}
+
+select {
+    position: absolute;
+    bottom: -70px;
+    right: 0;
+}
+
 
 
 @media (min-width: 992px) {
