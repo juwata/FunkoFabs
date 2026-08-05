@@ -30,7 +30,10 @@ main img {
     }
 
     main {
-        margin-top: 200px;
-        gap: 200px;
+        gap: 150px;
+    }
+
+    main img {
+        height: 75dvh;
     }
 }
