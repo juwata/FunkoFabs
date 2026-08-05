@@ -64,4 +64,9 @@ form {
     .cont {
         gap: 50px;
     }
+
+    .image {
+        width: fit-content;
+        height: 75dvh;
+    }
 }

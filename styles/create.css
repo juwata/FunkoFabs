@@ -34,3 +34,10 @@ form {
     max-width: 450px;
     margin: 50px 0;
 }
+
+@media (min-width: 992px) {
+    .faballsAlien {
+        width: fit-content;
+        height: 75dvh;
+    }
+}

@@ -34,18 +34,62 @@
         <p>Uma vitrine para ver todos produtos!</p>
     </div>
 
-    <section class="filtros-catalogo">
-        <input type="text" id="search-input" placeholder="Buscar action figure...">
-        <select id="sort-select">
-            <option value="">Tirar filtro</option>
-            <option value="preco-asc">Menor Preço</option>
-            <option value="preco-desc">Maior Preço</option>
-            <option value="nome-asc">A - Z</option>
-            <option value="nome-desc">Z - A</option>
-        </select>
+    <section class="filters">
+        <div class="search">
+            <input type="text" id="search-input">
+            <label for="search-input"><img src="../assets/icons/magglass.svg" alt=""></label>
+        </div>
+
+        <div class="select">
+            <label for="select-select" class="select-label"><img src="../assets/icons/filter.svg" alt=""></label>
+            <input type="checkbox" id="select-select" hidden>
+            <select id="sort-select">
+                <option value="">Todos</option>
+                <option value="preco-asc">Menor Preço</option>
+                <option value="preco-desc">Maior Preço</option>
+                <option value="nome-asc">A - Z</option>
+                <option value="nome-desc">Z - A</option>
+            </select>
+        </div>
     </section>
 
-    <main id="vitrine"></main>
+    <main>
+        <a href="product.html">
+            <img src="../assets/images/FaballsAlien.webp">
+            <p>FabsFabsFabs</p>
+            <p>R$123,21</p>
+        </a>
+
+        <a href="">
+            <img src="../assets/images/FaballsAlien.webp">
+            <p>FabsFabsFabs</p>
+            <p>R$123,21</p>
+        </a>
+
+        <a href="">
+            <img src="../assets/images/FaballsAlien.webp">
+            <p>FabsFabsFabs</p>
+            <p>R$123,21</p>
+        </a>
+
+        <a href="">
+            <img src="../assets/images/FaballsAlien.webp">
+            <p>FabsFabsFabs</p>
+            <p>R$123,21</p>
+        </a>
+
+        <a href="">
+            <img src="../assets/images/FaballsAlien.webp">
+            <p>FabsFabsFabs</p>
+            <p>R$123,21</p>
+        </a>
+
+        <a href="">
+            <img src="../assets/images/FaballsAlien.webp">
+            <p>FabsFabsFabs</p>
+            <p>R$123,21</p>
+        </a>
+    </main>
 
     <script src="../scripts/script.js"></script>
 </body>

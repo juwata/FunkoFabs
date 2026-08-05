@@ -8,7 +8,12 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 30px;
+    gap: 40px;
+}
+
+section {
+    width: 90dvw;
+    max-width: 500px;
 }
 
 .title {
@@ -20,6 +25,13 @@ main {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 40px;
 }
 
 form {
@@ -42,16 +54,43 @@ label {
     gap: 5px;
 }
 
-button {
-    margin: 0 auto;
-    position: absolute;
-    bottom: 100px;
+.table {
+    width: 90dvw;
+    display: grid;
+    row-gap: 12px;
+    justify-content: space-between;
+    grid-template-rows: repeat(4,fit-content(100%));
+    grid-template-columns: repeat(2,fit-content(100%));
 }
 
+.table > p:nth-child(2n) {
+    text-align: right;
+}
+
+.table > p:nth-child(n + 7) {
+    font-weight: bold;
+}
+
+.confirm {
+    margin: 0 auto 50px auto;
+}
 
 
 @media (min-width: 992px) {
     body {
         margin-top: 120px;
+    }
+
+    main {
+        gap: 200px;
+    }
+
+    .confirm {
+        position: absolute;
+        bottom: 100px;
+    }
+
+    .table {
+        max-width: 300px;
     }
 }
