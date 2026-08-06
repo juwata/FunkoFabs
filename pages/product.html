@@ -6,44 +6,51 @@
     <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/product.css">
-    <title>FunkoFabs</title>
+    <title>FunkoFabs - Detalhes</title>
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="../assets/logo-black.svg" alt="">
+            <img src="../assets/logo-black.svg" id="header-logo" alt="">
             <nav class="pc">
                 <ul>
-                    <li><a href="#slide1">Início</a></li>
-                    <li><a href="pages/catalog.html">Catálogo</a></li>
-                    <li><a href="pages/create.html">Crie o seu</a></li>
-                    <li><a href="#slide4">Avaliações</a></li>
+                    <li><a href="../index.html">Início</a></li>
+                    <li><a href="catalog.html">Catálogo</a></li>
+                    <li><a href="create.html">Crie o seu</a></li>
+                    <li><a href="../index.html#slide3">Avaliações</a></li>
                 </ul>
             </nav>
         </div>
         <div class="pc actions">
-            <a href=""><img src="../assets/icons/cart.svg" alt=""></a>
-            <a href=""><img src="../assets/icons/perfil.svg" alt=""></a>
+            <a href="cart.html"><img src="../assets/icons/cart.svg" alt=""></a>
+            <a href="perfil.html"><img src="../assets/icons/perfil.svg" alt=""></a>
         </div>
-        <a href="../pages/nav.html" class="mb"><img src="../assets/icons/menu.svg" alt=""></a>
+        <a href="nav.html" class="mb"><img src="../assets/icons/menu.svg" alt=""></a>
     </header>
 
-    <main>
-        <img src="../assets/images/FaballsAlien.png" class="image">
+    <main id="detalhes-produto">
+        <!-- Adicionados IDs para manipulação segura pelo JavaScript -->
+        <img src="../assets/images/placeholder.png" class="image" id="prod-img" alt="Imagem do Produto">
 
         <div class="cont">
             <section class="info">
-                <h1>Nome do funko fabs</h1>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veniam sit iure autem molestias laboriosam exercitationem. Nam, enim error minima eveniet voluptatem provident culpa perspiciatis vero nemo quae? Sapiente, explicabo optio?</p>
+                <h1 id="prod-nome">Carregando...</h1>
+                <p id="prod-desc"></p>
             </section>
-            <p class="price">R$200,00</p>
-            <form method="get">
+            <p class="price" id="prod-preco"></p>
+            
+            <form id="form-carrinho">
                 <div class="inp-box">
-                    <p>-</p> <p>0</p> <p>+</p>
+                    <p id="btn-menos" style="cursor: pointer;">-</p>
+                    <p id="prod-qtd">1</p>
+                    <p id="btn-mais" style="cursor: pointer;">+</p>
                 </div>
-                <button class="bt-icon bt-blue"><img src="../assets/icons/addcart.svg" alt="">Adicionar ao carrinho</button>
+                <a href="" style="text-decoration: none;"><button type="submit" class="bt-icon bt-blue" id="btn-add-cart"><img src="../assets/icons/addcart.svg" alt="">Adicionar ao carrinho</button></a>
             </form>
         </div>
     </main>
+
+    <!-- Script principal da página de detalhes -->
+    <script type="module" src="../js/pages/product.js"></script>
 </body>
 </html>

@@ -6,26 +6,27 @@
     <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/create.css">
+    <script type="module" src="../js/pages/create.js"></script>
     <title>FunkoFabs</title>
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="../assets/logo-black.svg" alt="">
+            <img src="../assets/logo-black.svg" id="header-logo" alt="">
             <nav class="pc">
                 <ul>
-                    <li><a href="#slide1">Início</a></li>
-                    <li><a href="pages/catalog.html">Catálogo</a></li>
-                    <li><a href="pages/create.html">Crie o seu</a></li>
-                    <li><a href="#slide4">Avaliações</a></li>
+                    <li><a href="../index.html">Início</a></li>
+                    <li><a href="catalog.html">Catálogo</a></li>
+                    <li><a href="create.html">Crie o seu</a></li>
+                    <li><a href="../index.html#slide3">Avaliações</a></li>
                 </ul>
             </nav>
         </div>
         <div class="pc actions">
-            <a href=""><img src="../assets/icons/cart.svg" alt=""></a>
-            <a href=""><img src="../assets/icons/perfil.svg" alt=""></a>
+            <a href="cart.html"><img src="../assets/icons/cart.svg" alt=""></a>
+            <a href="perfil.html"><img src="../assets/icons/perfil.svg" alt=""></a>
         </div>
-        <a href="../pages/nav.html" class="mb"><img src="../assets/icons/menu.svg" alt=""></a>
+        <a href="nav.html" class="mb"><img src="../assets/icons/menu.svg" alt=""></a>
     </header>
 
     <main>
@@ -36,12 +37,14 @@
             </section>
             <p>Sentiu falta de alguma versão ou quer um boneco personalizado com a sua cara ou com aquela piada interna do seu grupo de amigos? <br><br>
             Estamos preparando uma ala secreta na fábrica para encomendas 100% customizadas. Cadastre-se e mude o multiverso em primeira mão.</p>
-            <form method="post">
-                <input type="email" required autofocus autocomplete="email" placeholder="Digite seu melhor email">
-                <button class="bt-blue">entrar na lista vip</button>
+            <form method="post" style="position: relative; width: 100%;">
+                <input type="email" required autocomplete="email" placeholder="Digite seu melhor email" style="width: 100%; max-width: 400px; padding: 15px; border-radius: 10px; border: 1px solid var(--black); font-family: var(--font);">
+                <button type="submit" class="bt-blue" style="margin-top: 15px;">entrar na lista vip</button>
             </form>
         </div>
-        <img src="../assets/images/FaballsAlien.png" class="faballsAlien" alt="">
+        <img src="../assets/images/FaballsAlien.webp" class="faballsAlien" alt="Fabs Alien">
     </main>
+
+    <script src="../scripts/script.js"></script>
 </body>
 </html>

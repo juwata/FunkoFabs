@@ -1,0 +1,67 @@
+# ==========================================
+# GERAL / SISTEMA OPERACIONAL
+# ==========================================
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+*.log
+
+# ==========================================
+# IDEs E EDITORES (VS Code, IntelliJ, etc)
+# ==========================================
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+
+# ==========================================
+# FRONT-END (HTML, JS, Node se usar no futuro)
+# ==========================================
+node_modules/
+dist/
+build/
+.env
+.env.*
+!.env.example
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm/
+
+# ==========================================
+# BACK-END (Java / Spring Boot / Maven)
+# ==========================================
+# Ignora a pasta target em qualquer nível do projeto
+target/
+backend/target/
+
+# Arquivos gerados pelo Maven
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# Permite commitar o wrapper do maven (scripts), mas ignora o jar pesado
+.mvn/wrapper/maven-wrapper.jar
+
+# Binários compilados do Java (caso escapem da pasta target)
+*.class
+*.jar
+*.war
+*.ear
+
+# Arquivos de propriedades sensíveis (Ex: senhas de banco de produção)
+# Caso você crie eles no futuro
+application-dev.properties
+application-prod.properties
+application-secrets.properties
+secrets.properties

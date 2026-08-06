@@ -9,6 +9,7 @@
     --pri: #DC1D25;
     --sec: #163CD4;
     --price: #30CA12;
+    --total: #FF7700;
 
     --text: 'Poppins';
     --title: 'Protest Strike'
@@ -20,16 +21,17 @@
 
     font: 18px var(--text);
     letter-spacing: -1px;
-    color: var(--corBranco);
     text-decoration: none;
     border: 0;
     box-sizing: border-box;
+}
+
+html {
     scroll-behavior: smooth;
 }
 
 body {
     background: var(--white);
-    margin-top: 120px;
 }
 
 h1 {
@@ -48,26 +50,37 @@ h2 {
     padding: 5px 15px;
 }
 
+h3 {
+    font-weight: bold;
+}
+
 p {
     line-height: 95%;
+}
 
+a {
+    color: var(--black);
+    text-decoration: underline;
 }
 
 
 
 button {
+    color: var(--white);
     width: fit-content;
     padding: 5px 28px;
     border-radius: 100px;
-    color: var(--white);
-    text-transform: uppercase;
     font-weight: bold;
+    text-transform: uppercase;
     letter-spacing: -6%;
+    cursor: pointer;
 }
 
 .bt-red {background: var(--pri)}
 
 .bt-blue{background: var(--sec)}
+
+.bt-black{background: var(--black)}
 
 .bt-out {
     background: none;
@@ -86,11 +99,30 @@ button {
 header {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100dvw;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 30px;
+    padding: 20px 30px;
+    z-index: 1000;
+    transition: transform .35s ease;
+}
+
+header:not(.index) {
+    background: linear-gradient(var(--white) 60%, transparent);
+}
+
+header.light nav a {
+    color: var(--white);
+}
+
+header.light .actions img, header.light .mb img {
+    filter: brightness(0) invert(1);
+}
+
+header:not(.light) {
+    background: linear-gradient(var(--white) 60%, transparent);
 }
 
 header .pc {display: none}
@@ -100,8 +132,7 @@ header .pc {display: none}
 .title {text-align: center}
 
 
-
-input , select{
+input:not([type="radio"]), select{
     width: 90dvw;
     max-width: 500px;
     border: 1px solid var(--black);
@@ -110,10 +141,39 @@ input , select{
     color: #575757;
 }
 
+nav > ul > li {
+    list-style: none;
+}
 
+/* Base para a mensagem de feedback */
+.feedback-msg {
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+    /* Transição suave para quando ela aparecer */
+    transition: all 0.3s ease; 
+}
+/* Estilo para erros (Vermelho) */
+.feedback-msg.error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+/* Estilo para sucesso (Verde) */
+.feedback-msg.success {
+    background-color: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+}
 
-@media (min-width: 768px) {
-
+@media (max-width: 767px) {
+    header.hide {
+        transform: translateY(-120%);
+    }
 }
 
 
@@ -122,9 +182,6 @@ input , select{
     * {
         font-size: 1.1rem;
     }
-
-
-
     
     header .pc {display: block}
     header .mb {display: none}
@@ -138,7 +195,22 @@ input , select{
 }
 
 
-
 @view-transition {
     navigation: auto;
+}
+
+/* Loading Spinner */
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: var(--pri);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

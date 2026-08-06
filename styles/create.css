@@ -1,3 +1,7 @@
+body {
+    margin-top: 80px;
+}
+
 main {
     width: 90dvw;
     margin: 0 auto;
@@ -27,6 +31,13 @@ form {
 
 .faballsAlien {
     width: 90dvw;
-    max-width: 500px;
+    max-width: 450px;
     margin: 50px 0;
+}
+
+@media (min-width: 992px) {
+    .faballsAlien {
+        width: fit-content;
+        height: 75dvh;
+    }
 }

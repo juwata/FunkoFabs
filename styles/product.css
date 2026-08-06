@@ -1,3 +1,7 @@
+body {
+    margin-top: 90px;
+}
+
 main {
     width: 90dvw;
     margin: 0 auto;
@@ -17,7 +21,7 @@ main {
 
 .image {
     width: 90dvw;
-    max-width: 500px;
+    max-width: 450px;
     margin-bottom: 25px;
 }
 
@@ -50,7 +54,7 @@ form {
 
 @media (min-width: 992px) {
     main {
-        margin: 180px auto 0 auto;
+        margin: 120px auto 0 auto;
     }
 
     form {
@@ -59,5 +63,10 @@ form {
 
     .cont {
         gap: 50px;
+    }
+
+    .image {
+        width: fit-content;
+        height: 75dvh;
     }
 }
