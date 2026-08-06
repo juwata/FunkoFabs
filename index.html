@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -41,7 +41,7 @@
             <a href="pages/cart.html" aria-label="Ir para o Carrinho"><img src="assets/icons/cart.svg" alt=""></a>
             <a href="pages/perfil.html" aria-label="Ir para o Perfil"><img src="assets/icons/perfil.svg" alt=""></a>
         </div>
-        <a href="pages/nav.html" class="mb" aria-label="Abrir Menu de Navega��o"><img src="assets/icons/menu.svg" alt=""></a>
+        <a href="pages/nav.html" class="mb" aria-label="Abrir Menu de Navegação"><img src="assets/icons/menu.svg" alt="" aria-hidden="true"></a>
     </header>
 
     <main>
@@ -197,6 +197,7 @@
                 <h1 id="newsletter-title">FIQUE POR DENTRO DAS FABNOVIDADES</h1>
                 <div class="newsletter-content">
                     <form class="newsletter-form">
+                        <label for="newsletter-email" class="sr-only">Seu melhor email</label>
                         <input type="email" id="newsletter-email" name="email" placeholder="seu melhor email" required>
                         <button type="submit" class="bt-black">RECEBER</button>
                     </form>
@@ -208,7 +209,7 @@
                 <div class="footer-content">
                     <div class="footer-about">
                         <a href="#" class="footer-logo" aria-label="Ir para a página inicial"><img
-                                src="assets/logo-black.svg"></a>
+                                src="assets/logo-black.svg" alt="" aria-hidden="true"></a>
                         <p>
                             FunkoFabs é a loja oficial dos colecionáveis
                             mais icônicos e incríveis da cultura pop.
@@ -227,10 +228,10 @@
                         </ul>
                     </nav>
 
-                    <address class="footer-payment">
+                    <div class="footer-payment">
                         <h2>Formas de pagamento</h2>
-                        <img src="assets/images/pix.svg">
-                    </address>
+                        <img src="assets/images/pix.svg" alt="Pix">
+                    </div>
                 </div>
 
                 <small>© 2026 FunkoFabs. Todos os direitos reservados.</small>
@@ -238,17 +239,20 @@
         </section>
     </main>
 
-    <script src="scripts/script.js">
+    <script src="scripts/script.js"></script>
+    <script>
         // SplashScreen
         // fazer ela desaparecer
         const splash = document.getElementById('splash');
 
-        splash.addEventListener('animationend', function (e) {
-            if (e.animationName === 'splash-fade-out') {
-                this.remove();
-                document.body.classList.remove('loading');
-            }
-        });
+        if(splash) {
+            splash.addEventListener('animationend', function (e) {
+                if (e.animationName === 'splash-fade-out') {
+                    this.remove();
+                    document.body.classList.remove('loading');
+                }
+            });
+        }
     </script>
     <script type="module" src="js/pages/index.js"></script>
     <!-- Início do VLibras -->
