@@ -22,22 +22,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify({ email: email })
                 });
 
-                // Sucesso
                 btnSubmit.textContent = 'CADASTRADO!';
-                btnSubmit.style.backgroundColor = 'var(--price)'; // verde
+                btnSubmit.classList.remove('bg-error');
+                btnSubmit.classList.add('bg-success');
                 emailInput.value = '';
                 
             } catch (erro) {
-                // Erro (ex: e-mail já existe)
-                btnSubmit.textContent = 'ERRO';
-                btnSubmit.style.backgroundColor = 'var(--pri)'; // vermelho
+                 btnSubmit.textContent = 'ERRO';
+                btnSubmit.classList.remove('bg-success');
+                btnSubmit.classList.add('bg-error');
                 console.error("Erro ao cadastrar na newsletter: ", erro);
             } finally {
                 // Volta ao estado original após 3 segundos
                 setTimeout(() => {
-                    btnSubmit.disabled = false;
                     btnSubmit.textContent = 'RECEBER';
-                    btnSubmit.style.backgroundColor = ''; 
+                    btnSubmit.classList.remove('bg-success', 'bg-error');
+                    btnSubmit.disabled = false;
                 }, 3000);
             }
         });

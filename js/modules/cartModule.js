@@ -22,37 +22,24 @@ export async function carregarCarrinho(silencioso = false) {
             container.textContent = ''; 
             
             const divEmpty = document.createElement('div');
-            divEmpty.style.textAlign = 'center';
-            divEmpty.style.padding = '50px 20px';
-            divEmpty.style.width = '100%';
-            divEmpty.style.gridColumn = '1 / -1'; 
+            divEmpty.className = 'cart-empty-container';
 
             const imgEmpty = document.createElement('img');
             imgEmpty.src = '../assets/icons/cart.svg';
             imgEmpty.alt = 'Carrinho vazio';
-            imgEmpty.style.width = '80px';
-            imgEmpty.style.opacity = '0.5';
-            imgEmpty.style.marginBottom = '20px';
+            imgEmpty.className = 'cart-empty-img';
 
             const h2Empty = document.createElement('h2');
             h2Empty.textContent = 'Seu carrinho está vazio!';
-            h2Empty.style.marginBottom = '15px';
-            h2Empty.style.color = 'var(--black)';
-            h2Empty.style.border = 'none';
-            h2Empty.style.width = '100%';
-            h2Empty.style.textAlign = 'center';
+            h2Empty.className = 'cart-empty-title';
 
             const pEmpty = document.createElement('p');
             pEmpty.textContent = 'Que tal adicionar alguns FunkoFabs incríveis?';
-            pEmpty.style.marginBottom = '30px';
-            pEmpty.style.color = '#666';
+            pEmpty.className = 'cart-empty-desc';
 
             const btnEmpty = document.createElement('button');
-            btnEmpty.className = 'bt-blue';
+            btnEmpty.className = 'bt-blue cart-empty-btn';
             btnEmpty.textContent = 'Ir para o Catálogo';
-            btnEmpty.style.padding = '10px 30px';
-            btnEmpty.style.borderRadius = '20px';
-            btnEmpty.style.cursor = 'pointer';
             btnEmpty.addEventListener('click', () => {
                 window.location.href = 'catalog.html';
             });
@@ -61,12 +48,12 @@ export async function carregarCarrinho(silencioso = false) {
             container.appendChild(divEmpty);
 
             const divBuy = document.querySelector('.buy');
-            if (divBuy) divBuy.style.display = 'none';
+            if (divBuy) divBuy.classList.add('hidden');
             return;
         }
 
         const divBuy = document.querySelector('.buy');
-        if (divBuy) divBuy.style.display = 'flex';
+        if (divBuy) divBuy.classList.remove('hidden');
 
 
         const fragmento = document.createDocumentFragment();
@@ -82,7 +69,7 @@ export async function carregarCarrinho(silencioso = false) {
 
         container.appendChild(fragmento);
         document.getElementById('carrinho-total').textContent = `Total: R$ ${valorTotal.toFixed(2)}`;
-        document.getElementById('btn-finalizar').style.display = 'inline-flex';
+        document.getElementById('btn-finalizar').classList.remove('hidden');
 
     } catch (erro) {
         const container = document.getElementById(containerId);
@@ -90,9 +77,7 @@ export async function carregarCarrinho(silencioso = false) {
             container.textContent = '';
             const p = document.createElement('p');
             p.textContent = 'Não foi possível acessar o carrinho no momento.';
-            p.style.textAlign = 'center';
-            p.style.width = '100%';
-            p.style.gridColumn = '1 / -1';
+            p.className = 'cart-error-msg';
             container.appendChild(p);
         }
         mostrarErro("Falha de comunicação com o servidor.");
@@ -101,12 +86,12 @@ export async function carregarCarrinho(silencioso = false) {
 
 export async function removerItem(itemId, articleElement) {
     try {
-        articleElement.style.opacity = '0.5'; 
+        articleElement.classList.add('cart-item-loading'); 
         await CartService.removerItemCart(itemId);
         
         carregarCarrinho(true); 
     } catch (erro) {
-        articleElement.style.opacity = '1';
+        articleElement.classList.remove('cart-item-loading');
         mostrarErro(erro.message || "Erro ao remover item.");
     }
 }
@@ -165,11 +150,7 @@ function criarElementoItem(item, subtotal) {
     const btnMenos = document.createElement('button');
     btnMenos.type = 'button';
     btnMenos.textContent = '-';
-    btnMenos.className = 'btn-menos';
-    btnMenos.style.cursor = 'pointer';
-    btnMenos.style.background = 'none';
-    btnMenos.style.color = 'inherit';
-    btnMenos.style.font = 'inherit';
+    btnMenos.className = 'btn-menos cart-qty-btn';
 
     const pQtd = document.createElement('p');
     pQtd.textContent = item.quantity;
@@ -177,19 +158,13 @@ function criarElementoItem(item, subtotal) {
     const btnMais = document.createElement('button');
     btnMais.type = 'button';
     btnMais.textContent = '+';
-    btnMais.className = 'btn-mais';
-    btnMais.style.cursor = 'pointer';
-    btnMais.style.background = 'none';
-    btnMais.style.color = 'inherit';
-    btnMais.style.font = 'inherit';
+    btnMais.className = 'btn-mais cart-qty-btn';
 
     divInp.append(btnMenos, pQtd, btnMais);
 
     const btnTrash = document.createElement('button');
     btnTrash.type = 'button';
-    btnTrash.className = 'btn-excluir';
-    btnTrash.style.cursor = 'pointer';
-    btnTrash.style.background = 'none';
+    btnTrash.className = 'btn-excluir cart-qty-btn';
 
     const imgTrash = document.createElement('img');
     imgTrash.src = '../assets/icons/trash.svg';

@@ -140,3 +140,5 @@ select {
         right: 25px;
     }
 }
+
+.catalog-msg-centered { text-align: center; width: 100%; grid-column: 1 / -1; }

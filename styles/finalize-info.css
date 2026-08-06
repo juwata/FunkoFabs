@@ -94,3 +94,5 @@ label {
         max-width: 300px;
     }
 }
+
+.frete-gratis { color: var(--pri); font-weight: bold; }

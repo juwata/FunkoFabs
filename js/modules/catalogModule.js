@@ -21,9 +21,7 @@ export async function inicializarCatalogo() {
             container.textContent = '';
             const p = document.createElement('p');
             p.textContent = 'Indisponível no momento.';
-            p.style.textAlign = 'center';
-            p.style.width = '100%';
-            p.style.gridColumn = '1 / -1';
+            p.className = 'catalog-msg-centered';
             container.appendChild(p);
         }
 

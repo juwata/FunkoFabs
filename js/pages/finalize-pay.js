@@ -37,16 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 await navigator.clipboard.writeText(pixCode);
                 btnCopiarPix.textContent = "Código PIX copiado!";
-                btnCopiarPix.style.color = "var(--price)";
-                btnCopiarPix.style.fontWeight = "bold";
-                btnCopiarPix.style.textDecoration = "none";
+                btnCopiarPix.classList.add('pix-copiado');
                 
                 // Opcional: Voltar ao texto original depois de 3 segundos
                 setTimeout(() => {
                     btnCopiarPix.textContent = "ou copiar código do PIX";
-                    btnCopiarPix.style.color = "";
-                    btnCopiarPix.style.fontWeight = "";
-                    btnCopiarPix.style.textDecoration = "underline";
+                    btnCopiarPix.classList.remove('pix-copiado');
                 }, 3000);
             } catch (err) {
                 console.error("Erro ao copiar PIX: ", err);

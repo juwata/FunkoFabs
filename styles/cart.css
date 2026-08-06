@@ -87,3 +87,13 @@ form {
         width: 20px;
     }
 }
+
+/* Refatoração CSS no JS */
+.cart-empty-container { text-align: center; padding: 50px 20px; width: 100%; grid-column: 1 / -1; }
+.cart-empty-img { width: 80px; opacity: 0.5; margin-bottom: 20px; }
+.cart-empty-title { margin-bottom: 15px; color: var(--black); border: none; width: 100%; text-align: center; }
+.cart-empty-desc { margin-bottom: 30px; color: #666; }
+.cart-empty-btn { padding: 10px 30px; border-radius: 20px; cursor: pointer; }
+.cart-error-msg { text-align: center; width: 100%; grid-column: 1 / -1; }
+.cart-item-loading { opacity: 0.5; pointer-events: none; }
+.cart-qty-btn { cursor: pointer; background: none; color: inherit; border: none; padding: 5px; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; }

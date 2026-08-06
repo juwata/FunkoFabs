@@ -35,3 +35,5 @@ main img {
         margin-top: 20px;
     }
 }
+
+.pix-copiado { color: var(--price); font-weight: bold; text-decoration: none; }

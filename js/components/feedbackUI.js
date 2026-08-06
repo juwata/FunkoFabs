@@ -11,19 +11,7 @@ function garantirDivGlobal() {
         divErro = document.createElement('div');
         divErro.id = 'mensagem-erro-global';
         divErro.role = 'alert'; // Acessibilidade obrigatória (leitor de tela)
-        
-        divErro.style.position = 'fixed';
-        divErro.style.bottom = '20px';
-        divErro.style.right = '20px';
-        divErro.style.zIndex = '9999';
-        divErro.style.display = 'none';
-        divErro.style.minWidth = '300px';
-        divErro.style.maxWidth = '400px';
-        divErro.style.width = 'auto';
-        divErro.style.margin = '0';
-        divErro.style.padding = '15px';
-        divErro.style.borderRadius = '8px';
-        divErro.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+        divErro.classList.add('feedback-global', 'hidden');
         
         // Insere a div direto no <body>
         document.body.appendChild(divErro);
@@ -38,8 +26,8 @@ export function mostrarErro(mensagem, containerId = null) {
     if (div) {
         // Se for a global ou tiver classe de feedback, aplica a cor vermelha
         if (!containerId || div.classList.contains('feedback-msg') || containerId === 'mensagem-erro-global') {
-            div.className = 'feedback-msg error';
-            div.style.display = 'block';
+            div.classList.remove('success', 'hidden');
+            div.classList.add('feedback-msg', 'error');
         }
         div.textContent = mensagem;
     }
@@ -51,8 +39,8 @@ export function mostrarSucesso(mensagem, containerId = null) {
     if (div) {
         // Aplica a classe verde
         if (!containerId || div.classList.contains('feedback-msg') || containerId === 'mensagem-erro-global') {
-            div.className = 'feedback-msg success';
-            div.style.display = 'block';
+            div.classList.remove('error', 'hidden');
+            div.classList.add('feedback-msg', 'success');
         }
         div.textContent = mensagem;
     }
@@ -63,7 +51,7 @@ export function limparFeedback(containerId = null) {
     
     if (div) {
         if (!containerId || containerId === 'mensagem-erro-global') {
-            div.style.display = 'none';
+            div.classList.add('hidden');
         }
         div.textContent = '';
     }
@@ -76,19 +64,14 @@ export function mostrarLoading(containerId = null) {
         div.textContent = ''; // Limpa o conteúdo anterior
         
         const wrapper = document.createElement('div');
-        wrapper.style.display = 'flex';
-        wrapper.style.justifyContent = 'center';
-        wrapper.style.alignItems = 'center';
-        wrapper.style.width = '100%';
-        wrapper.style.gridColumn = '1 / -1';
-        wrapper.style.padding = '40px 0';
+        wrapper.className = 'feedback-wrapper';
 
         const spinner = document.createElement('div');
         spinner.className = 'spinner';
         
         if (!containerId || div.classList.contains('feedback-msg') || containerId === 'mensagem-erro-global') {
-            div.className = 'feedback-msg'; 
-            div.style.display = 'block';
+            div.classList.remove('success', 'error', 'hidden');
+            div.classList.add('feedback-msg');
         }
         
         wrapper.appendChild(spinner);

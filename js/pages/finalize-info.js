@@ -73,12 +73,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (subtotal >= 500) {
             valorFrete = 0;
             elFrete.textContent = "Grátis";
-            elFrete.style.color = "var(--pri)";
-            elFrete.style.fontWeight = "bold";
+            elFrete.classList.add('frete-gratis');
         } else {
             elFrete.textContent = formatarMoeda(valorFrete);
-            elFrete.style.color = "inherit";
-            elFrete.style.fontWeight = "normal";
+            elFrete.classList.remove('frete-gratis');
         }
 
         const total = subtotal - desconto + valorFrete;

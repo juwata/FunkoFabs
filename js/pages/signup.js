@@ -33,14 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 fotoArquivo = file; 
                 leitor.onload = function(evento) {
                     fotoBase64 = evento.target.result;
-                    previewFoto.src = fotoBase64;      
-                    previewFoto.style.width = '100%';
-                    previewFoto.style.height = '100%';
-                    previewFoto.style.borderRadius = '10px';
-                    previewFoto.style.objectFit = 'cover';
-                    textoFoto.style.display = 'none';
+                    previewFoto.src = evento.target.result;
+                    previewFoto.classList.add('preview-foto-active');
+                    textoFoto.classList.add('hidden');
                     
-                    if (btnRemoverFoto) btnRemoverFoto.style.display = 'block';
+                    if (btnRemoverFoto) btnRemoverFoto.classList.remove('hidden');
                 };
                 leitor.readAsDataURL(file);
             }
@@ -51,14 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 fotoArquivo = null;
                 fotoBase64 = null;
                 inputFoto.value = ''; // Limpa o input nativo
-                previewFoto.src = '../assets/icons/cam.svg';
-                previewFoto.style.width = '';
-                previewFoto.style.height = '';
-                previewFoto.style.borderRadius = '';
-                previewFoto.style.objectFit = '';
-                textoFoto.style.display = 'block';
-                textoFoto.innerHTML = 'Escolha sua melhor foto! <br> (ou não também)';
-                btnRemoverFoto.style.display = 'none';
+                previewFoto.src = '../assets/icons/upload.svg';
+                previewFoto.classList.remove('preview-foto-active');
+                textoFoto.classList.remove('hidden');
+                
+                if (btnRemoverFoto) {
+                    btnRemoverFoto.classList.add('hidden');
+                }
             });
         }
     }

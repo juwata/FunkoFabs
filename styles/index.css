@@ -613,3 +613,6 @@ h3 {
         visibility: hidden;
     }
 }
+
+.bg-success { background-color: var(--price) !important; }
+.bg-error { background-color: var(--pri) !important; }
