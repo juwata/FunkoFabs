@@ -24,11 +24,23 @@ document.addEventListener('DOMContentLoaded', () => {
             qtd++;
             displayQtd.textContent = qtd;
         });
+        btnMais.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                btnMais.click();
+            }
+        });
         
         btnMenos.addEventListener('click', () => {
             if (qtd > 1) { 
                 qtd--;
                 displayQtd.textContent = qtd;
+            }
+        });
+        btnMenos.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                btnMenos.click();
             }
         });
     }

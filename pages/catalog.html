@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,7 @@
 <body>
     <header>
         <div class="logo">
-            <img src="../assets/logo-black.svg" id="header-logo" alt="">
+            <img src="../assets/logo-black.svg" id="header-logo" alt="Logotipo FunkoFabs">
             <nav class="pc">
                 <ul>
                     <li><a href="../index.html">Início</a></li>
@@ -23,10 +23,10 @@
             </nav>
         </div>
         <div class="pc actions">
-            <a href="cart.html"><img src="../assets/icons/cart.svg" alt=""></a>
-            <a href="perfil.html"><img src="../assets/icons/perfil.svg" alt=""></a>
+            <a href="cart.html" aria-label="Ir para o Carrinho"><img src="../assets/icons/cart.svg" alt=""></a>
+            <a href="perfil.html" aria-label="Ir para o Perfil"><img src="../assets/icons/perfil.svg" alt=""></a>
         </div>
-        <a href="nav.html" class="mb"><img src="../assets/icons/menu.svg" alt=""></a>
+        <a href="nav.html" class="mb" aria-label="Abrir Menu de Navegação"><img src="../assets/icons/menu.svg" alt=""></a>
     </header>
 
     <div class="title">
@@ -36,14 +36,14 @@
 
     <section class="filters">
         <div class="search">
-            <input type="text" id="search-input">
+            <input type="text" id="search-input" aria-label="Buscar produtos">
             <label for="search-input"><img src="../assets/icons/magglass.svg" alt=""></label>
         </div>
 
         <div class="select">
             <label for="select-select" class="select-label"><img src="../assets/icons/filter.svg" alt=""></label>
-            <input type="checkbox" id="select-select" hidden>
-            <select id="sort-select">
+            <input type="checkbox" id="select-select" class="sr-only" aria-label="Abrir opções de filtro">
+            <select id="sort-select" aria-label="Ordenar produtos por">
                 <option value="">Todos</option>
                 <option value="preco-asc">Menor Preço</option>
                 <option value="preco-desc">Maior Preço</option>
@@ -57,5 +57,20 @@
     </main>
 
     <script src="../scripts/script.js"></script>
+    <!-- Início do VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+    <!-- Fim do VLibras -->
+    <!-- Início do UserWay -->
+    <script src="https://cdn.userway.org/widget.js" data-account="p9xWdK9B2g" data-position="3"></script>
+    <!-- Fim do UserWay -->
 </body>
 </html>
