@@ -33,7 +33,10 @@ export async function carregarDetalhesProduto(idProduto) {
 export async function adicionarAoCarrinho(productId, quantity, btnSubmit) {
     try {
         btnSubmit.disabled = true;
-        btnSubmit.innerHTML = '<div class="spinner" style="width: 20px; height: 20px; border-width: 3px; border-left-color: white; margin: 0;"></div>';
+        btnSubmit.textContent = '';
+        const spinner = document.createElement('div');
+        spinner.className = 'spinner spinner-btn';
+        btnSubmit.appendChild(spinner);
 
         // Chama a API com o Token
         await CartService.adicionarItem({ productId, quantity });
@@ -44,6 +47,12 @@ export async function adicionarAoCarrinho(productId, quantity, btnSubmit) {
         mostrarErro(erro.message || "Erro ao adicionar ao carrinho.");
     } finally {
         btnSubmit.disabled = false;
-        btnSubmit.innerHTML = '<img src="../assets/icons/addcart.svg" alt="">Adicionar ao carrinho';
+        btnSubmit.textContent = '';
+        const img = document.createElement('img');
+        img.src = '../assets/icons/addcart.svg';
+        img.alt = '';
+        img.setAttribute('aria-hidden', 'true');
+        btnSubmit.appendChild(img);
+        btnSubmit.appendChild(document.createTextNode('Adicionar ao carrinho'));
     }
 }

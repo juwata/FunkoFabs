@@ -246,3 +246,6 @@ nav > ul > li {
     white-space: nowrap;
     border: 0;
 }
+
+.spinner-sm { width: 15px; height: 15px; border-width: 2px; margin: 0; }
+.spinner-btn { width: 20px; height: 20px; border-width: 3px; border-left-color: white; border-bottom-color: transparent; margin: 0; }

@@ -115,7 +115,10 @@ export async function alterarQuantidade(itemId, novaQtd, pQtdElement = null) {
     try {
         limparFeedback();
         if (pQtdElement) {
-            pQtdElement.innerHTML = '<div class="spinner" style="width: 15px; height: 15px; border-width: 2px; margin: 0;"></div>';
+            pQtdElement.textContent = '';
+            const spinner = document.createElement('div');
+            spinner.className = 'spinner spinner-sm';
+            pQtdElement.appendChild(spinner);
         }
         await CartService.atualizarQuantidade(itemId, novaQtd);
         carregarCarrinho(true); 

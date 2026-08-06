@@ -107,7 +107,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             try {
                 btnConfirmar.disabled = true;
-                btnConfirmar.innerHTML = '<div class="spinner" style="width: 20px; height: 20px; border-width: 3px; border-color: #fff; border-bottom-color: transparent;"></div>';
+                btnConfirmar.textContent = '';
+                const spinner = document.createElement('div');
+                spinner.className = 'spinner spinner-btn';
+                btnConfirmar.appendChild(spinner);
 
                 const addressObj = {
                     cep: iCep.value.trim(),
