@@ -2,18 +2,17 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 
 // Configuração do Protocolo 5.2
-// Regra 11: Página principal + 1 página interna
 const PAGES = [
   { name: 'Página Principal', url: 'http://127.0.0.1:5500/index.html' },
   { name: 'Página Interna (Checkout)', url: 'http://127.0.0.1:5500/pages/finalize-info.html' }
 ];
 
-// Regra 10: 3 execuções consecutivas
 const RUNS = 3;
 const TEMP_REPORT = './temp-report.json';
 const FINAL_REPORT = './lighthouse-report.md';
 
 function getMedian(values) {
+    if (values.length === 0) return 0;
     values.sort((a, b) => a - b);
     const half = Math.floor(values.length / 2);
     if (values.length % 2) return values[half];
@@ -38,8 +37,8 @@ for (const page of PAGES) {
     for (let i = 1; i <= RUNS; i++) {
         console.log(`  -> Execução ${i} de ${RUNS}...`);
         
-        // Regras 7, 8 e 9: Chrome anônimo, Acessibilidade, Desktop
-        const command = `lighthouse ${page.url} ` +
+        // CORREÇÃO: Utilizando lighthouse@11 para manter compatibilidade com Node.js v18.14.0
+        const command = `npx lighthouse@11 ${page.url} ` +
             `--only-categories=accessibility ` +
             `--preset=desktop ` +
             `--chrome-flags="--incognito" ` +
@@ -48,7 +47,7 @@ for (const page of PAGES) {
             `--quiet`;
 
         try {
-            execSync(command, { stdio: 'ignore' });
+            execSync(command, { stdio: 'inherit' });
             
             const reportData = JSON.parse(fs.readFileSync(TEMP_REPORT, 'utf8'));
             const score = reportData.categories.accessibility.score * 100;
@@ -58,7 +57,9 @@ for (const page of PAGES) {
             
             markdownOutput += `| #${i} | ${fetchTime} | **${score}** |\n`;
         } catch (error) {
-            console.error(`Erro na execução ${i} para ${page.name}:`, error.message);
+            console.error(`\n❌ ERRO FATAL na execução ${i} para ${page.name}:`);
+            console.error(error.message);
+            console.error(`Verifique os logs acima para entender o motivo.\n`);
         }
     }
 
@@ -67,7 +68,6 @@ for (const page of PAGES) {
     console.log(`✔ Mediana concluída: ${medianScore}\n`);
 }
 
-// Limpeza e salvamento
 if (fs.existsSync(TEMP_REPORT)) {
     fs.unlinkSync(TEMP_REPORT);
 }
