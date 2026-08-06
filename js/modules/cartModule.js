@@ -135,6 +135,7 @@ function criarElementoItem(item, subtotal) {
     
     const img = document.createElement('img');
     img.src = item.product.imageUrl || '../assets/images/placeholder.png';
+    img.alt = `Imagem de ${item.product.name}`;
     a.appendChild(img);
 
     const divContainer = document.createElement('div');
