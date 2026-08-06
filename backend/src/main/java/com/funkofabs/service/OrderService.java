@@ -40,7 +40,8 @@ public class OrderService {
             total = total.add(itemTotal);
             order.getItems().add(OrderItem.builder().order(order).product(p).quantity(ci.getQuantity()).unitPrice(p.getPrice()).build());
         }
-        order.setTotal(total);
+        BigDecimal freight = total.compareTo(BigDecimal.valueOf(500)) >= 0 ? BigDecimal.ZERO : BigDecimal.valueOf(15.00);
+        order.setTotal(total.add(freight));
 
         order = orderRepository.save(order);
 

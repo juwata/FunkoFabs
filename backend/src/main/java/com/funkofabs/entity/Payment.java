@@ -26,6 +26,13 @@ public class Payment {
     @Builder.Default
     private String approval = "pendente";
 
-    @Column(name = "data_pagamento", insertable = false, updatable = false)
+    @Column(name = "data_pagamento")
     private LocalDateTime paymentDate;
+
+    @PrePersist
+    protected void onCreate() {
+        if (this.paymentDate == null) {
+            this.paymentDate = LocalDateTime.now();
+        }
+    }
 }

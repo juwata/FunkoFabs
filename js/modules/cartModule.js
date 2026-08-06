@@ -4,7 +4,6 @@ import { mostrarErro, mostrarLoading, limparFeedback } from '../components/feedb
 export async function carregarCarrinho(silencioso = false) {
     const containerId = 'carrinho-lista';
 
-    // Se nem tiver token salvo, já expulsa para o login instantaneamente
     if (!localStorage.getItem('funkofabs_token')) {
         window.location.href = 'login.html';
         return;
@@ -105,7 +104,7 @@ export async function removerItem(itemId, articleElement) {
         articleElement.style.opacity = '0.5'; 
         await CartService.removerItemCart(itemId);
         
-        carregarCarrinho(true); // Recarrega silenciosamente
+        carregarCarrinho(true); 
     } catch (erro) {
         articleElement.style.opacity = '1';
         mostrarErro(erro.message || "Erro ao remover item.");
@@ -116,23 +115,20 @@ export async function alterarQuantidade(itemId, novaQtd, pQtdElement = null) {
     try {
         limparFeedback();
         if (pQtdElement) {
-            // Coloca um spinner pequenininho diretamente no número
             pQtdElement.innerHTML = '<div class="spinner" style="width: 15px; height: 15px; border-width: 2px; margin: 0;"></div>';
         }
         await CartService.atualizarQuantidade(itemId, novaQtd);
-        carregarCarrinho(true); // Recarrega silenciosamente
+        carregarCarrinho(true); 
     } catch (erro) {
         mostrarErro(erro.message || "Erro ao atualizar quantidade.");
-        carregarCarrinho(true); // Recarrega para voltar o numero original caso falhe
+        carregarCarrinho(true); 
     }
 }
 
-/**
- * Cria a estrutura HTML de cada item de forma segura (sem innerHTML)
- */
+
 function criarElementoItem(item, subtotal) {
     const article = document.createElement('article');
-    article.dataset.itemId = item.id; // ID do Item do carrinho (diferente do id do produto)
+    article.dataset.itemId = item.id; 
 
     const a = document.createElement('a');
     a.href = `product.html?id=${item.product.id}`;

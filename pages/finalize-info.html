@@ -42,10 +42,10 @@
 
             <form method="post">
                 <input type="text" placeholder="CEP" id="iCEP" autofocus>
-                <input type="text" placeholder="Rua">
-                <input type="number" placeholder="Número">
-                <input type="text" placeholder="Cidade">
-                <input type="text" placeholder="Estado">
+                <input type="text" placeholder="Rua" id="iRua">
+                <input type="number" placeholder="Número" id="iNum">
+                <input type="text" placeholder="Cidade" id="iCidade">
+                <input type="text" placeholder="Estado" id="iEstado">
             </form>
         </section>
 
@@ -67,20 +67,20 @@
                 </div>
                 <div class="table">
                     <p>Subtotal:</p>
-                    <p>R$67,00</p>
+                    <p id="resumo-subtotal">R$ 0,00</p>
                     <p>Desconto:</p>
-                    <p>R$123,00</p>
+                    <p id="resumo-desconto">R$ 0,00</p>
                     <p>Frete:</p>
-                    <p>R$666,00</p>
+                    <p id="resumo-frete">R$ 0,00</p>
                     <p>Total:</p>
-                    <p>R$6767,00</p>
+                    <p id="resumo-total">R$ 0,00</p>
                 </div>
             </section>
         </article>
-        <a href="finalize-pay.html" class="confirm"><button class="bt-blue">confirmar</button></a>
+        <button class="bt-blue confirm" id="btn-confirmar">confirmar</button>
     </main>   
 
     <script src="../scripts/script.js"></script>
-    <script src="../scripts/finalize-info.js"></script>
+    <script type="module" src="../js/pages/finalize-info.js"></script>
 </body>
 </html>

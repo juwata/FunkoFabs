@@ -34,8 +34,16 @@ public class Order {
     private BigDecimal total;
 
     @Column(name = "status")
+    @Builder.Default
     private String status = "pendente";
 
-    @Column(name = "data_compra", insertable = false, updatable = false)
+    @Column(name = "data_compra")
     private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        if (this.createdAt == null) {
+            this.createdAt = LocalDateTime.now();
+        }
+    }
 }

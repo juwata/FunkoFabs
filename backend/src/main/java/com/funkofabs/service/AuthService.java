@@ -70,6 +70,7 @@ public class AuthService {
                 .name(user.getName())
                 .email(user.getEmail())
                 .phone(user.getPhone())
+                .address(user.getAddress())
                 .photoUrl(user.getPhotoUrl())
                 .role(user.getRole().name())
                 .build();
@@ -86,6 +87,10 @@ public class AuthService {
 
         if (request.getPhone() != null && !request.getPhone().isBlank()) {
             user.setPhone(request.getPhone());
+        }
+
+        if (request.getAddress() != null && !request.getAddress().isBlank()) {
+            user.setAddress(request.getAddress());
         }
 
         if (request.getPhotoUrl() != null && !request.getPhotoUrl().isBlank()) {
